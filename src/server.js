@@ -4,6 +4,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { env } from './utils/env.js';
 import { ENV_VARS } from './constants/index.js';
+import router from './routers/index.js';
 // import pino from 'pino-http';
 
 const PORT = Number(env(ENV_VARS.PORT, 7000));
@@ -27,6 +28,8 @@ export const setupServer = () => {
       message: 'Hello World',
     });
   });
+
+  app.use(router);
 
   app.use('*', notFoundHandler);
   app.use('*', errorHandler);
