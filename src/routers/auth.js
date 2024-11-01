@@ -15,10 +15,17 @@ authRouter.post(
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
-authRouter.post('/login', validateBody(loginUserSchema)),
-  ctrlWrapper(loginUser);
+
+authRouter.post(
+  '/login',
+  validateBody(loginUserSchema),
+  ctrlWrapper(loginUser),
+);
+
 authRouter.post('/logout', ctrlWrapper(logoutUser));
+
 authRouter.post('/refresh-session', ctrlWrapper(refreshUserSessionController));
+
 authRouter.patch('/update-profile', ctrlWrapper());
 
 export default authRouter;
