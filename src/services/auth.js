@@ -8,6 +8,7 @@ import {
 } from '../constants/time.js';
 import { User } from '../db/models/user.js';
 
+// ----- User Register -----
 export const registerUser = async (registrationData) => {
   const user = await User.findOne({ email: registrationData.email });
 
@@ -21,6 +22,7 @@ export const registerUser = async (registrationData) => {
   });
 };
 
+// ----- User Login and Create Session -----
 export const loginUser = async (loginData) => {
   const user = User.findOne({ email: loginData.email });
 
@@ -50,6 +52,7 @@ export const loginUser = async (loginData) => {
   return session;
 };
 
+// ----- User Logout -----
 export const logoutUser = async (sessionid) => {
   await User.deleteMany({ _id: sessionid });
 };
@@ -61,6 +64,7 @@ const createSession = () => ({
   refreshTokenValidUntil: new Date(Date.now() + REFRESH_TOKEN_LIVE_TIME),
 });
 
+// ----- Refresh session -----
 export const refreshSession = async (sessionId, sessionToken) => {
   const session = await Session.findOne({
     _id: sessionId,

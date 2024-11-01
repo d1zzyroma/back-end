@@ -5,7 +5,7 @@ import {
   refreshSession,
   registerUser,
 } from '../services/auth.js';
-
+//  ----- User Register -----
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
 
@@ -16,6 +16,7 @@ export const registerUserController = async (req, res) => {
   });
 };
 
+// ----- User Login and Create Session -----
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
@@ -37,7 +38,7 @@ export const loginUserController = async (req, res) => {
     },
   });
 };
-
+//  ----- User Logout -----
 export const logoutUserController = async (req, res) => {
   if (req.cookies.sessionId) {
     await logoutUser(req.cookies.sessionid);
