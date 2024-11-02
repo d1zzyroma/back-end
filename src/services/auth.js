@@ -45,34 +45,31 @@ export const deleteSession = (sessionId) =>
   SessionCollection.deleteOne({ _id: sessionId });
 
 
-// ----- User Logout -----
-// export const logoutUser = async (sessionid) => {
-//   await UserCollection.deleteMany({ _id: sessionid });
-// };
+
 
 // ----- Refresh session -----
-// export const refreshSession = async (sessionId, sessionToken) => {
-//   const session = await Session.findOne({
-//     _id: sessionId,
-//     refreshToken: sessionToken,
-//   });
+export const refreshSession = async (sessionId, sessionToken) => {
+  const session = await SessionCollection.findOne({
+    _id: sessionId,
+    refreshToken: sessionToken,
+  });
 
-//   if (!session) {
-//     throw createHttpError(401, 'Session not found');
-//   }
+  if (!session) {
+    throw createHttpError(401, 'Session not found');
+  }
 
-//   const now = new Date();
+  const now = new Date();
 
-//   if (session.refreshTokenValidUntil < now) {
-//     throw createHttpError(401, 'Refresh token expired');
-//   }
+  if (session.refreshTokenValidUntil < now) {
+    throw createHttpError(401, 'Refresh token expired');
+  }
 
-//   await Session.deleteOne({ _id: sessionId, refreshToken: sessionToken });
+  await SessionCollection.deleteOne({ _id: sessionId, refreshToken: sessionToken });
 
-//   const newSession = await Session.create({
-//     userId: session.userId,
-//     ...createSession(),
-//   });
+  const newSession = await SessionCollection.create({
+    userId: session.userId,
+    ...createSession(),
+  });
 
-//   return newSession;
-// };
+  return newSession;
+};

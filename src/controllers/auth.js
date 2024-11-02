@@ -1,12 +1,9 @@
 import createHttpError from 'http-errors';
-// import { ACCESS_TOKEN_LIVE_TIME, THIRTY_DAYS } from '../constants/time.js';
 import {
   createSession,
   deleteSession,
   findUserByEmail,
-  // loginUser,
-  // logoutUser,
-  // refreshSession,
+  refreshSession,
   registerUser,
 } from '../services/auth.js';
 import bcrypt from 'bcrypt';
@@ -54,25 +51,24 @@ export const logoutUserController = async (req, res) => {
     await deleteSession(req.cookies.sessionId);
   }
 
-
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
 
   res.status(204).send();
 };
 
+// ----- Refresh Session -----
+export const refreshUserSessionController = async (req, res) => {
+  const session = await refreshSession(
+    req.cookies.sessionId,
+    req.cookies.sessionToken,
+  );
 
-// export const refreshUserSessionController = async (req, res) => {
-//   const session = await refreshSession(
-//     req.cookies.sessionId,
-//     req.cookies.sessionToken,
-//   );
+  setupSessionCookies(session, res);
 
-//   setupSessionCookies(session, res);
-
-//   res.json({
-//     status: 200,
-//     message: 'Successfully refreshed a session!',
-//     data: { accessToken: session.accessToken },
-//   });
-// };
+  res.json({
+    status: 200,
+    message: 'Successfully refreshed a session!',
+    data: { accessToken: session.accessToken },
+  });
+};
