@@ -1,10 +1,18 @@
-import { ACCESS_TOKEN_LIVE_TIME, THIRTY_DAYS } from '../constants/time.js';
+import createHttpError from 'http-errors';
+// import { ACCESS_TOKEN_LIVE_TIME, THIRTY_DAYS } from '../constants/time.js';
 import {
-  loginUser,
-  logoutUser,
-  refreshSession,
+  createSession,
+  deleteSession,
+  findUserByEmail,
+  // loginUser,
+  // logoutUser,
+  // refreshSession,
   registerUser,
 } from '../services/auth.js';
+import bcrypt from 'bcrypt';
+import { setupSessionCookies } from '../utils/setupSessionCookies.js';
+
+
 //  ----- User Register -----
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -17,32 +25,35 @@ export const registerUserController = async (req, res) => {
 };
 
 // ----- User Login and Create Session -----
-export const loginUserController = async (req, res) => {
-  const session = await loginUser(req.body);
+export const loginUserController = async (req,res) =>{
+const user  = await findUserByEmail(req.body.email)
+if (!user) throw createHttpError (401, 'Wrong credentials')
 
-  res.cookie('refreshToken', session.refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now() + THIRTY_DAYS),
-  });
+  const isEqualPassword = await bcrypt.compare(
+    req.body.password,
+    user.password,
+  );
+  if (!isEqualPassword) throw createHttpError(401, 'Wrong credentials');
 
-  res.cookie('sessionToken', session._id, {
-    httpOnly: true,
-    expires: new Date(Date.now() + THIRTY_DAYS),
-  });
+  const session = await createSession(user._id)
+
+ setupSessionCookies(res, session);
 
   res.json({
     status: 200,
-    message: 'Successfully logged in!',
+    message: 'Saccessfully logged in!',
     data: {
       accessToken: session.accessToken,
     },
-  });
+  })
 };
+
 //  ----- User Logout -----
 export const logoutUserController = async (req, res) => {
   if (req.cookies.sessionId) {
-    await logoutUser(req.cookies.sessionid);
+    await deleteSession(req.cookies.sessionId);
   }
+
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
@@ -50,29 +61,18 @@ export const logoutUserController = async (req, res) => {
   res.status(204).send();
 };
 
-const setupSessionCookies = (session, res) => {
-  res.cookie('sessionId', session._id, {
-    httpOnly: true,
-    expires: new Date(Date.now + ACCESS_TOKEN_LIVE_TIME),
-  });
 
-  res.cookie('sessionToken', session.refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now + ACCESS_TOKEN_LIVE_TIME),
-  });
-};
+// export const refreshUserSessionController = async (req, res) => {
+//   const session = await refreshSession(
+//     req.cookies.sessionId,
+//     req.cookies.sessionToken,
+//   );
 
-export const refreshUserSessionController = async (req, res) => {
-  const session = await refreshSession(
-    req.cookies.sessionId,
-    req.cookies.sessionToken,
-  );
+//   setupSessionCookies(session, res);
 
-  setupSessionCookies(session, res);
-
-  res.json({
-    status: 200,
-    message: 'Successfully refreshed a session!',
-    data: { accessToken: session.accessToken },
-  });
-};
+//   res.json({
+//     status: 200,
+//     message: 'Successfully refreshed a session!',
+//     data: { accessToken: session.accessToken },
+//   });
+// };
