@@ -33,7 +33,7 @@ export const getBoardsController = async (req, res, next) => {
 
   res.json({
     status: 200,
-    message: 'Successfully found contacts!',
+    message: 'Successfully found boards!',
     data: contacts,
   });
 };
@@ -51,7 +51,7 @@ export const getBoardByIdController = async (req, res) => {
     // Відповідь, якщо board знайдено
     res.json({
       status: 200,
-      message: `Successfully found contact with id ${boardId}!`,
+      message: `Successfully found board with id ${boardId}!`,
       data: board,
     });
   } catch (err) {
