@@ -1,8 +1,5 @@
-//src/constants/index.js
 
-// for Boards
-import path from 'node:path';
-//
+import path from 'node:path':
 
 export const ENV_VARS = {
   PORT: 'PORT',
@@ -18,7 +15,6 @@ export const MONGO_DB_VARS = {
   CLOUDINARY_CLOUD_NAME: 'CLOUDINARY_CLOUD_NAME',
 };
 
-// const for Boards
 export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
 export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 export const SORT_ORDER = {
@@ -32,4 +28,14 @@ export const CLOUDINARY = {
   API_SECRET: 'API_SECRET',
 };
 
-//
+
+export const SMTP = {
+  SMTP_HOST: 'SMTP_HOST',
+  SMTP_PORT: 'SMTP_PORT',
+  SMTP_USER: 'SMTP_USER',
+  SMTP_PASSWORD: 'SMTP_PASSWORD',
+  SMTP_FROM: 'SMTP_FROM',
+};
+
+
+export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');

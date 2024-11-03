@@ -1,7 +1,7 @@
 
 import createHttpError from 'http-errors';
-import { Session } from '../db/models/session.js';
-import { User } from '../db/models/user.js';
+import { SessionCollection } from '../db/models/session.js';
+import { UserCollection } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -18,7 +18,7 @@ export const authenticate = async (req, res, next) => {
     next(createHttpError(401, 'Auth header should be of type Bearer'));
   }
 
-  const session = await Session.findOne({
+  const session = await SessionCollection.findOne({
     accessToken: token,
   });
 
@@ -35,7 +35,7 @@ export const authenticate = async (req, res, next) => {
     return;
   }
 
-  const user = await User.findById(session.userId);
+  const user = await UserCollection.findById(session.userId);
 
   if (!user) {
     next(createHttpError(401));
