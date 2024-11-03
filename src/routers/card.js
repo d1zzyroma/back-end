@@ -8,8 +8,9 @@ import {
   upsertCardController,
 } from '../controllers/card.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { validateBody } from '../middlewares/validateBody.js';
+
 import { createCardSchema, updateCardSchema } from '../validations/card.js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 const router = Router();
 
