@@ -30,6 +30,9 @@ export const findUserByEmail = (email) => UserCollection.findOne({email});
 // ----- Find User By Id -----
 export const findUserById = (userId) => UserCollection.findById(userId);
 
+// ----- Update User -----
+export const updateUser = (userData) =>UserCollection.findOneAndUpdate()
+
 
 // ----- Create Session -----
 export const createSession = async (userId) => {
