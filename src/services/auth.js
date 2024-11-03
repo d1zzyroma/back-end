@@ -25,7 +25,11 @@ export const registerUser = async (registrationData) => {
 };
 
 // ----- Find User By Email -----
-export const findUserByEmail = (email) => UserCollection.findOne({email})
+export const findUserByEmail = (email) => UserCollection.findOne({email});
+
+// ----- Find User By Id -----
+export const findUserById = (userId) => UserCollection.findById(userId);
+
 
 // ----- Create Session -----
 export const createSession = async (userId) => {

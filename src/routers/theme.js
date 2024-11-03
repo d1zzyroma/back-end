@@ -4,6 +4,6 @@ import { themeController } from '../controllers/theme.js';
 
 const themeRouter = Router() ;
 
-themeRouter.patch('/create', ctrlWrapper(themeController));
+themeRouter.patch('/:userId', ctrlWrapper(themeController));
 
 export default themeRouter;

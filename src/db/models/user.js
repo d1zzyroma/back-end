@@ -5,8 +5,8 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    theme: { type: String },
     avatarUrl: { type: String },
+    theme: { type: String, required: true, enum: ['light','dark', 'violet'],default: 'light' },
   },
   {
     // timestamps: true,
