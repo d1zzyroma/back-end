@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 export const ENV_VARS = {
   PORT: 'PORT',
 };
@@ -11,3 +13,15 @@ export const MONGO_DB_VARS = {
   CLOUDINARY_API_SECRET: 'CLOUDINARY_API_SECRET',
   CLOUDINARY_CLOUD_NAME: 'CLOUDINARY_CLOUD_NAME',
 };
+
+
+export const SMTP = {
+  SMTP_HOST: 'SMTP_HOST',
+  SMTP_PORT: 'SMTP_PORT',
+  SMTP_USER: 'SMTP_USER',
+  SMTP_PASSWORD: 'SMTP_PASSWORD',
+  SMTP_FROM: 'SMTP_FROM',
+};
+
+
+export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
