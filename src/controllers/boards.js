@@ -16,18 +16,18 @@ import { saveFileToCloudinary } from '../utils/boards/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 
 export const getBoardsController = async (req, res, next) => {
-  const { page, perPage } = parsePaginationParams(req.query);
+  /*  const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
-  const filter = parseFilterParams(req.query);
+  const filter = parseFilterParams(req.query); */
   const user = req.user._id;
   const contacts = await getAllBoards(
-    {
+    /*  {
       page,
       perPage,
       sortBy,
       sortOrder,
       filter,
-    },
+    }, */
     user,
   );
 
@@ -82,7 +82,8 @@ export const createBoardController = async (req, res, next) => {
 
 export const deleteBoardController = async (req, res, next) => {
   const { boardId } = req.params;
-  const board = await deleteBoard(boardId);
+  const { userId } = req.user;
+  const board = await deleteBoard(boardId, userId);
   if (!board) {
     next(createHttpError(404, `Board with Id  ${boardId} not found in db!`));
     return;

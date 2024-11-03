@@ -6,7 +6,7 @@ import { BoardsCollection } from '../db/models/board.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../constants/index.js';
 
-export const getAllBoards = async (
+/* export const getAllBoards = async (
   {
     page = 1,
     perPage = 10,
@@ -37,6 +37,11 @@ export const getAllBoards = async (
     data: boards,
     ...paginationData,
   };
+}; */
+
+export const getAllBoards = async (user) => {
+  const boards = await BoardsCollection.find({ userId: user });
+  return boards;
 };
 
 export const getBoardById = async (boardId, user) => {
@@ -59,9 +64,10 @@ export const createBoard = async (payload, user, photoUrl) => {
   return board;
 };
 
-export const deleteBoard = async (boardId) => {
+export const deleteBoard = async (boardId, userId) => {
   const board = await BoardsCollection.findOneAndDelete({
     _id: boardId,
+    userId: userId,
   });
   // delete all colums with boardId in Column collections
   //delete all tasks with boardId in tasks collections
