@@ -2,9 +2,9 @@
 import createHttpError from 'http-errors';
 import { deleteUser, updateUserProfile } from '../services/users.js';
 // import { saveImageToCloudinary } from '../utils/saveImageToCloudinary.js';
-// import { UserCollection } from '../db/models/user.js';
 // import { parse } from 'path';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
+
 import { findUserById } from '../services/auth.js';
 
 // ----- Get Carent Users
@@ -15,38 +15,54 @@ const userId = req.user._id;
   if (!user) {
     throw createHttpError(401, 'User unauthorized');
   }
-
-  res.json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    avatarURL: user.avatarURL,
-    theme: user.theme,
-  });
-};
-
-// -----
-export const updateUserProfileController = async (req, res) => {
-  const { userId } = req.params;
-
-  const userData = req.body;
-
-  const user = await updateUserProfile(userId, { ...userData });
-  console.log(user);
-
-  // if (!user.value) {
-  //   throw createHttpError(404, {
-  //     status: '404',
-  //     message: `User with id ${userId} not found!`,
-  //   });
-  // }
-
-  res.send({
+  res.status(200).json({
     status: 200,
-    message: `Successfully updated a user!`,
-    data: user.value,
+    message: ` Successfully found user with id ${userId} !`,
+    data: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      avatarURL: user.avatarURL,
+      theme: user.theme,
+    }
   });
 };
+
+// ----- Update User Profile -----
+export const updateUserProfileController = async (req, res) => {
+  const { _id } = req.user;
+  const { name, email, password } = req.body;
+
+  const updateFields = {};
+
+  if (name) updateFields.name = name;
+  if (email) updateFields.email = email;
+  if (password) {
+    updateFields.password = await bcrypt.hash(password, 10);
+  }
+
+  try {
+    const user = await updateUserProfile(_id, updateFields, {
+      new: true,
+    });
+
+    if (!user) {
+      throw createHttpError(404, `User not found`);
+    }
+
+    res.json({
+      status:200,
+      message: 'Profile updated successfully',
+      date:{name: user.name,
+        email: user.email,
+        password: password}
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 // export const patchAvatarController = async (req, res) => {
 //   const { _id } = req.user;

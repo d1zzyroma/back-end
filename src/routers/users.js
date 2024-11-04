@@ -21,7 +21,7 @@ usersRouter.use('/', authenticate);
 usersRouter.get('/current', ctrlWrapper(getCurrentUserController));
 
 usersRouter.patch(
-  '/profile/:userId',
+  '/profile',
   // upload.single('avatar'),
   ctrlWrapper(updateUserProfileController),
 );
