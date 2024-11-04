@@ -3,10 +3,12 @@ import { model, Schema } from 'mongoose';
 
 const boardsSchema = new Schema(
   {
-    title: { type: String, required: true },
-    icons: { type: String, required: false },
-    background: { type: String, required: false },
-    userId: { type: Schema.Types.ObjectId, ref: 'users' },
+    titleBoard: { type: String, required: true },
+    icon: { type: String, required: false },
+    background: { type: String},
+    filter: { type: String},
+    userId: { type: Schema.Types.ObjectId },
+    // userId: { type: Schema.Types.ObjectId, ref: 'users' },
     //  createdAt: { type: Date },
     //  updatedAt: { type: Date },
   },
