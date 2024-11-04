@@ -27,7 +27,7 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
-  '/change-theme',
+  '/theme',
   validateBody(userUpdateThemeSchema),
   ctrlWrapper(patchThemeController),
 );

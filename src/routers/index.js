@@ -10,7 +10,7 @@ import columnsRouter from './columns.js';
 const router = Router();
 
 router.use('/auth', authRouter);
-router.use('/users', usersRouter);
+router.use('/user', usersRouter);
 router.use('/boards', boardsRouter);
 router.use('/columns', columnsRouter);
 router.use('/cards', cardsRouter);
