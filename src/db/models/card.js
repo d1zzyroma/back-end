@@ -22,12 +22,12 @@ const cardsSchema = new Schema(
     columnId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'columns',
+      ref: 'column',
     },
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'users',
+      ref: 'user',
     },
   },
   {
