@@ -57,7 +57,7 @@ export const getBoardById = async (boardId, user) => {
 export const createBoard = async (payload, user, photoUrl) => {
   const board = await BoardsCollection.create({
     ...payload,
-    userId: user._id,
+    owner: user._id,
     background: photoUrl,
   });
 
@@ -67,11 +67,12 @@ export const createBoard = async (payload, user, photoUrl) => {
 export const deleteBoard = async (boardId, userId) => {
   const board = await BoardsCollection.findOneAndDelete({
     _id: boardId,
-    userId: userId,
+    owner: userId,
   });
   // delete all colums with boardId in Column collections
   //delete all tasks with boardId in tasks collections
   return board;
+  t;
 };
 
 export const updateBoard = async (boardId, payload, options = {}) => {
