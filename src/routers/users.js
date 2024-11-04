@@ -12,10 +12,13 @@ import {
   // userUpdateProfileSchema,
   userUpdateThemeSchema,
 } from '../validations/users.js';
+import {authenticate} from '../middlewares/authenticate.js';
 
 const usersRouter = Router();
 
-usersRouter.get('/current-user/:userId', ctrlWrapper(getCurrentUserController));
+usersRouter.use('/', authenticate);
+
+usersRouter.get('/current', ctrlWrapper(getCurrentUserController));
 
 usersRouter.patch(
   '/profile/:userId',

@@ -7,15 +7,14 @@ import { deleteUser, updateUserProfile } from '../services/users.js';
 // import bcrypt from 'bcrypt';
 import { findUserById } from '../services/auth.js';
 
+// ----- Get Carent Users
 export const getCurrentUserController = async (req, res) => {
-  const { userId } = req.params;
-
+const userId = req.user._id;
   const user = await findUserById(userId);
 
   if (!user) {
     throw createHttpError(401, 'User unauthorized');
   }
-  console.log(user);
 
   res.json({
     _id: user._id,
@@ -26,6 +25,7 @@ export const getCurrentUserController = async (req, res) => {
   });
 };
 
+// -----
 export const updateUserProfileController = async (req, res) => {
   const { userId } = req.params;
 
