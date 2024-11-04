@@ -2,6 +2,8 @@
 
 import createHttpError from "http-errors";
 import { createBoard, getAllBoards, getBoardById } from "../services/boards.js";
+// import { getAllColumnsByBoardId } from "../services/columns.js";
+// import { getAllByColumnId } from "../services/card.js";
 
 // import {
 //   getAllBoards,
@@ -21,21 +23,8 @@ import { createBoard, getAllBoards, getBoardById } from "../services/boards.js";
 // Create New Board
 export const createBoardController = async (req, res,) => {
   const userId = req.user._id;
-    // const photo = req.file;
-    // //console.log('create post board in controller photo:', req.file);
-
-    // if (photo) {
-    //   if (env('ENABLE_CLOUDINARY') === 'true') {
-    //     photoUrl = await saveFileToCloudinary(photo);
-    //   } else {
-    //     photoUrl = await saveFileToUploadDir(photo);
-    //   }
-    // }
-
-    // // console.log('photoUrl in controller:', photoUrl);
-    // const board = await createBoard(req.body, req.user, photoUrl);
     const board = await createBoard(req.body, userId );
-   console.log(board);
+
 
     res.status(201).json({
       status: 201,
@@ -45,34 +34,9 @@ export const createBoardController = async (req, res,) => {
   };
 
 // ----- Get Borders By User Id
-// export const getBoardsController = async (req, res, next) => {
-//   /*  const { page, perPage } = parsePaginationParams(req.query);
-//   const { sortBy, sortOrder } = parseSortParams(req.query);
-//   const filter = parseFilterParams(req.query); */
-//   const user = req.user._id;
-//   const contacts = await getAllBoards(
-//     /*  {
-//       page,
-//       perPage,
-//       sortBy,
-//       sortOrder,
-//       filter,
-//     }, */
-//     user,
-//   );
-
-//   res.json({
-//     status: 200,
-//     message: 'Successfully found boards!',
-//     data: contacts,
-//   });
-// };
-
 export const getBoardsController = async (req, res, next) => {
   const userId = req.user._id;
   const boards = await getAllBoards(userId);
-
-  console.log(boards);
 
   res.json({
     status: 200,
@@ -82,32 +46,13 @@ export const getBoardsController = async (req, res, next) => {
 };
 
 // ----- Get Board By Board's Id -----
-// export const getBoardByIdController = async (req, res) => {
-//   const { boardId } = req.params;
-//   const user = req.user;
-//   try {
-//     const board = await getBoardById(boardId, user);
-
-//     if (!board) {
-//       throw createHttpError(404, 'Board not found');
-//     }
-
-//     // Відповідь, якщо board знайдено
-//     res.json({
-//       status: 200,
-//       message: `Successfully found board with id ${boardId}!`,
-//       data: board,
-//     });
-//   } catch (err) {
-//     throw createHttpError(404, `Board with Id: ${boardId} not found`);
-//   }
-// };
-
 export const getBoardByIdController = async (req, res) => {
   const { boardId } = req.params;
-  console.log(boardId);
     const board = await getBoardById(boardId);
-    console.log(board);
+
+    // const columns  = await getAllColumnsByBoardId(boardId);
+//     const cards = await getAllByColumnId(columns._id);
+//  console.log(columns);
 
     if (!board) {
       throw createHttpError(404, 'Board not found');
@@ -115,7 +60,8 @@ export const getBoardByIdController = async (req, res) => {
     res.json({
       status: 200,
       message: `Successfully found board with id ${boardId}!`,
-      data: {board, colums: 'gkgk'}
+      data: board
+      // data: {board, columns}
     });
 };
 
@@ -176,5 +122,57 @@ export const getBoardByIdController = async (req, res) => {
 //     status: 200,
 //     message: `Successfully patched a board Id: ${boardId}!`,
 //     data: result.board,
+//   });
+// };
+
+
+// =================================
+// // Create New Board
+// export const createBoardController = async (req, res,) => {
+//   const userId = req.user._id;
+//     // const photo = req.file;
+//     // //console.log('create post board in controller photo:', req.file);
+
+//     // if (photo) {
+//     //   if (env('ENABLE_CLOUDINARY') === 'true') {
+//     //     photoUrl = await saveFileToCloudinary(photo);
+//     //   } else {
+//     //     photoUrl = await saveFileToUploadDir(photo);
+//     //   }
+//     // }
+
+//     // // console.log('photoUrl in controller:', photoUrl);
+//     // const board = await createBoard(req.body, req.user, photoUrl);
+//     const board = await createBoard(req.body, userId );
+
+
+//     res.status(201).json({
+//       status: 201,
+//       message: `Successfully created a board!`,
+//       data: board,
+//     });
+//   };
+//=================================
+// ----- Get Borders By User Id
+// export const getBoardsController = async (req, res, next) => {
+//   /*  const { page, perPage } = parsePaginationParams(req.query);
+//   const { sortBy, sortOrder } = parseSortParams(req.query);
+//   const filter = parseFilterParams(req.query); */
+//   const user = req.user._id;
+//   const contacts = await getAllBoards(
+//     /*  {
+//       page,
+//       perPage,
+//       sortBy,
+//       sortOrder,
+//       filter,
+//     }, */
+//     user,
+//   );
+
+//   res.json({
+//     status: 200,
+//     message: 'Successfully found boards!',
+//     data: contacts,
 //   });
 // };
