@@ -3,7 +3,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
   loginUserController,
   logoutUserController,
-  refreshUserSessionController,
+  // refreshUserSessionController,
   registerUserController,
 } from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
@@ -25,9 +25,9 @@ authRouter.post(
 
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
+// authRouter.post('/refresh-session', ctrlWrapper(refreshUserSessionController));
 
-authRouter.post('/refresh-session', ctrlWrapper(refreshUserSessionController));
-
-authRouter.patch('/update-profile', ctrlWrapper());
+// authRouter.patch('/update-profile', ctrlWrapper());
 
 export default authRouter;
+//
