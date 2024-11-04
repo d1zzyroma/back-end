@@ -20,7 +20,7 @@ import { createBoardSchema, updateBoardSchema } from '../validations/boards.js';
 
 const router = Router();
 
-//router.use(authenticate); // аутентифікація user і  запис user в  req.user через middleware
+router.use(authenticate); // аутентифікація user і  запис user в  req.user через middleware
 
 router.get('/', ctrlWrapper(getBoardsController));
 router.get('/:boardId', isValidId, ctrlWrapper(getBoardByIdController));
