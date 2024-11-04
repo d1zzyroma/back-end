@@ -8,28 +8,16 @@ import {
   updateBoard,
 } from '../services/boards.js';
 import createHttpError from 'http-errors';
-import { parsePaginationParams } from '../utils/boards/parsePaginationParams.js';
-import { parseSortParams } from '../utils/boards/parseSortParams.js';
-import { parseFilterParams } from '../utils/boards/parseFilterParams.js';
+//import { parsePaginationParams } from '../utils/boards/parsePaginationParams.js';
+//import { parseSortParams } from '../utils/boards/parseSortParams.js';
+//import { parseFilterParams } from '../utils/boards/parseFilterParams.js';
 import { saveFileToUploadDir } from '../utils/boards/saveFileToUploadDir.js';
 import { saveFileToCloudinary } from '../utils/boards/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 
 export const getBoardsController = async (req, res, next) => {
-  /*  const { page, perPage } = parsePaginationParams(req.query);
-  const { sortBy, sortOrder } = parseSortParams(req.query);
-  const filter = parseFilterParams(req.query); */
   const user = req.user._id;
-  const contacts = await getAllBoards(
-    /*  {
-      page,
-      perPage,
-      sortBy,
-      sortOrder,
-      filter,
-    }, */
-    user,
-  );
+  const contacts = await getAllBoards(user);
 
   res.json({
     status: 200,
@@ -61,7 +49,6 @@ export const getBoardByIdController = async (req, res) => {
 
 export const createBoardController = async (req, res, next) => {
   const photo = req.file;
-  //console.log('create post board in controller photo:', req.file);
   let photoUrl = '';
   if (photo) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
@@ -71,7 +58,6 @@ export const createBoardController = async (req, res, next) => {
     }
   }
 
-  // console.log('photoUrl in controller:', photoUrl);
   const board = await createBoard(req.body, req.user, photoUrl);
   res.status(201).json({
     status: 201,
@@ -109,7 +95,6 @@ export const upsertBoardController = async (req, res, next) => {
 export const patchBoardController = async (req, res, next) => {
   const { boardId } = req.params;
   const photo = req.file;
-  //console.log('photo in controller:', photo);
   let photoUrl;
   if (photo) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
