@@ -1,21 +1,31 @@
-import express from 'express';
-import ctrlWrapper from '../utils/ctrlWrapper';
-import { authenticate, validateBody } from '../../middlewares'; // Waiting for auth
-import { boardSchema } from '../../models/board/'; // Waiting for boardSchema
+// import express from 'express';
+import { Router } from 'express';
+import { authenticate } from '../middlewares/authenticate.js'; // Waiting for auth
+import { createColumnController } from '../controllers/columns.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { validateBody } from '../middlewares/validateBody.js';
+import { createColumnsSchema } from '../validations/columns.js';
+// import { boardSchema } from '../../models/board/'; // Waiting for boardSchema
 
-const router = express.Router();
 
-router.post(
-  '/:boardId',
-  validateBody(boardSchema.addColumn),
-  authenticate,
-  ctrlWrapper.addColumnInBoard,
-);
+const columnsRouter = Router();
+// const router = express.Router();
+columnsRouter.use('/', authenticate);
 
-router.get('/:boardId', authenticate, ctrlWrapper.getColumns);
+columnsRouter.post('/:boardId',validateBody(createColumnsSchema),ctrlWrapper(createColumnController));
 
-router.put('/', authenticate, ctrlWrapper.updateColumn);
+// router.post(
+//   '/:boardId',
+//   validateBody(boardSchema.addColumn),
+//   authenticate,
+//   ctrlWrapper.addColumnInBoard,
+// );
 
-router.delete('/', authenticate, ctrlWrapper.deleteColumn);
+// router.get('/:boardId', authenticate, ctrlWrapper.getColumns);
 
-module.exports = router;
+// router.put('/', authenticate, ctrlWrapper.updateColumn);
+
+// router.delete('/', authenticate, ctrlWrapper.deleteColumn);
+
+// module.exports = router;
+export default columnsRouter;
