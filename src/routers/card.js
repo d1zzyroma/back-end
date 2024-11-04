@@ -17,26 +17,26 @@ const router = Router();
 router.use(authenticate);
 
 router.post(
-  '/:boardId',
+  '/',
   isValidId,
   validateBody(createCardSchema),
   ctrlWrapper(createCardController),
 );
 
 router.put(
-  '/:boardId',
+  '/:cardId',
   isValidId,
   validateBody(createCardSchema),
   ctrlWrapper(upsertCardController),
 );
 
 router.patch(
-  '/:boardId',
+  '/:cardId',
   isValidId,
   validateBody(updateCardSchema),
   ctrlWrapper(patchCardController),
 );
 
-router.delete('/:boardId', isValidId, ctrlWrapper(deleteCardController));
+router.delete('/:cardId', isValidId, ctrlWrapper(deleteCardController));
 
 export default router;
