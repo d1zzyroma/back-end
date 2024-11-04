@@ -52,7 +52,7 @@ const boardsSchema = new Schema(
         ],
       },
     ],
-    owner: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
       required: true,
