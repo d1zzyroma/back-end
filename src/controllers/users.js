@@ -41,7 +41,6 @@ export const updateUserProfileController = async (req, res) => {
     updateFields.password = await bcrypt.hash(password, 10);
   }
 
-  try {
     const user = await updateUserProfile(_id, updateFields, {
       new: true,
     });
@@ -57,9 +56,27 @@ export const updateUserProfileController = async (req, res) => {
         email: user.email,
         password: password}
     });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+
+};
+
+// ----- Change Thema
+export const changeThemeController = async(req, res) => {
+  const { _id } = req.user;
+  const theme = req.body;
+
+    const user = await updateUserProfile(_id, theme, {
+      new: true,
+    });
+
+    if (!user) {
+      throw createHttpError(404, `User not found`);
+    }
+
+    res.json({
+      status:200,
+      message: 'Theme changed successfully',
+      date: theme
+    });
 };
 
 
@@ -135,7 +152,7 @@ export const updateUserProfileController = async (req, res) => {
 //   }
 // };
 
-export const patchThemeController = (req, res) => {};
+
 export const deleteUserController = async (req, res) => {
   const user = await deleteUser(req.body);
   if (!user) {
