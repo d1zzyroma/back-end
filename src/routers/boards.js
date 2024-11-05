@@ -40,7 +40,7 @@ router.delete('/:boardId', isValidId, ctrlWrapper(deleteBoardController));
 router.put(
   '/:boardId',
   isValidId,
-  upload.single('background'),
+  //upload.single('background'),
   validateBody(createBoardSchema),
   ctrlWrapper(upsertBoardController),
 );

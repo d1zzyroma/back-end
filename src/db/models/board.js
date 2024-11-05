@@ -19,35 +19,11 @@ const boardsSchema = new Schema(
       enum: ['default', 'without', 'low', 'medium', 'high'],
       default: 'default',
     },
-    columns: [
-      {
-        title: { type: String, required: true },
-        owner: {
-          type: Schema.Types.ObjectId,
-          required: true,
-        },
-        cards: [
-          {
-            title: { type: String, required: true },
-            text: { type: String, required: true },
-            priority: {
-              type: String,
-              enum: ['without', 'low', 'medium', 'high'],
-              default: 'without',
-            },
-            deadline: { type: String, required: true },
-            owner: {
-              type: Schema.Types.ObjectId,
-              required: true,
-            },
-          },
-        ],
-      },
-    ],
+
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'user',
       required: true,
+      ref: 'user',
     },
   },
   { versionKey: false, timestamps: true },

@@ -1,6 +1,8 @@
 // src/services/boards.js
 
 import { BoardsCollection } from '../db/models/board.js';
+import { ColumnsCollection } from '../db/models/columns.js';
+import { CardsCollection } from '../db/models/card.js';
 //import createHttpError from 'http-errors';
 //import { faker } from '@faker-js/faker';
 //import { calculatePaginationData } from '../utils/calculatePaginationData.js';
@@ -13,12 +15,26 @@ export const getAllBoards = async (user) => {
 
 export const getBoardById = async (boardId, user) => {
   const board = await BoardsCollection.findById(boardId);
-
   if (board.owner.toString() === user._id.toString()) {
     return board;
   } else {
     return;
   }
+};
+export const getAllColumnsByBoardId = async (boardId, user) => {
+  const columns = await ColumnsCollection.find({
+    boardId: boardId,
+    userId: user,
+  });
+  return columns;
+};
+
+export const getAllCardsByBoardId = async (boardId, user) => {
+  const cards = await CardsCollection.find({
+    boardId: boardId,
+    userId: user,
+  });
+  return cards;
 };
 
 export const createBoard = async (payload, user, photoUrl) => {

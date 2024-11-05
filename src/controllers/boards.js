@@ -6,6 +6,8 @@ import {
   createBoard,
   deleteBoard,
   updateBoard,
+  getAllColumnsByBoardId,
+  getAllCardsByBoardId,
 } from '../services/boards.js';
 import createHttpError from 'http-errors';
 //import { parsePaginationParams } from '../utils/boards/parsePaginationParams.js';
@@ -17,23 +19,25 @@ import { env } from '../utils/env.js';
 
 export const getBoardsController = async (req, res, next) => {
   const user = req.user._id;
-  const contacts = await getAllBoards(user);
+  const boards = await getAllBoards(user);
 
   res.json({
     status: 200,
     message: 'Successfully found boards!',
-    data: contacts,
+    data: boards,
   });
 };
 
 export const getBoardByIdController = async (req, res) => {
   const { boardId } = req.params;
-  const user = req.user;
+  const user = req.user._id;
   try {
-    console.log('user:', user);
-    console.log('board:', boardId);
+    // console.log('user:', user);
+    //  console.log('board tipe:', typeof boardId);
+
     const board = await getBoardById(boardId, user);
-    const columns = await getAllColumnsByBoardId(boardID);
+    const columns = await getAllColumnsByBoardId(boardId, user);
+    const cards = await getAllCardsByBoardId(boardId, user);
 
     if (!board) {
       throw createHttpError(404, 'Board not  found');
@@ -42,7 +46,9 @@ export const getBoardByIdController = async (req, res) => {
     res.json({
       status: 200,
       message: `Successfully found board with id ${boardId}!`,
-      data: board,
+      board: board,
+      columns: columns,
+      cards: cards,
     });
   } catch (err) {
     throw createHttpError(404, `Board with Id: ${boardId} not found`);
