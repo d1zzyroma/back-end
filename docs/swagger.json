@@ -23,10 +23,6 @@
       "description": "Auth operations."
     },
     {
-      "name": "Students",
-      "description": "Operations about users."
-    },
-    {
       "name": "Support",
       "description": "Operations about users support"
     }
