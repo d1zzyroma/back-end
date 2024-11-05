@@ -1,4 +1,3 @@
-
 import path from 'node:path';
 
 export const ENV_VARS = {
