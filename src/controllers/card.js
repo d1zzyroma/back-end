@@ -1,5 +1,6 @@
 import createHttpError from 'http-errors';
 import { createCard, deleteCard, updateCard } from '../services/card.js';
+import { CardsCollection } from '../db/models/card.js';
 
 export const createCardController = async (req, res) => {
   const card = await createCard(req.body);
@@ -23,9 +24,17 @@ export const deleteCardController = async (req, res, next) => {
 };
 
 export const patchCardController = async (req, res, next) => {
-  const { cardId } = req.params;
-  const result = await updateCard(cardId, req.body);
+  const {
+    body: { columnId },
+    params: { id: _id },
+  } = req;
+  const { _id: userId } = req.user;
 
+  const result = await CardsCollection.findOneAndUpdate(
+    { _id, userId },
+    { columnId },
+    { new: true },
+  );
   if (!result) {
     next(createHttpError(404, 'Card not found'));
     return;

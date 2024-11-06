@@ -22,7 +22,7 @@ const cardsSchema = new Schema(
     columnId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'columns',
+      ref: 'column',
     },
     boardId: {
       type: Schema.Types.ObjectId,
@@ -32,7 +32,7 @@ const cardsSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'users',
+      ref: 'user',
     },
   },
   {
