@@ -1,4 +1,3 @@
-// src/db/models/board.js
 import { model, Schema } from 'mongoose';
 
 const boardsSchema = new Schema(
@@ -14,12 +13,11 @@ const boardsSchema = new Schema(
       tablet: { type: String },
       mobile: { type: String },
     },
-    filter: {
-      type: String,
-      enum: ['default', 'without', 'low', 'medium', 'high'],
-      default: 'default',
-    },
-
+    // filter: {
+    //   type: String,
+    //   enum: ['default', 'without', 'low', 'medium', 'high'],
+    //   default: 'default',
+    // },
     owner: {
       type: Schema.Types.ObjectId,
       required: true,

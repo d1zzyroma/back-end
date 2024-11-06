@@ -17,6 +17,39 @@ import { saveFileToUploadDir } from '../utils/boards/saveFileToUploadDir.js';
 import { saveFileToCloudinary } from '../utils/boards/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 
+// ----- Create Board -----
+export const createBoardController = async (req, res, next) => {
+  const board = await createBoard(req.body, req.user);
+
+  res.status(201).json({
+    status: 201,
+    message: `Successfully created a board!`,
+    data: board,
+  });
+};
+
+// ----- Get Board By Id -----
+export const getBoardByIdController = async (req, res) => {
+  const { boardId } = req.params;
+  // const user = req.user._id;
+
+    const board = await getBoardById(boardId);
+    const columns = await getAllColumnsByBoardId(boardId, user);
+    // const cards = await getAllCardsByBoardId(boardId, user);
+    if (!board) {
+      throw createHttpError(404, 'Board not  found');
+    }
+    res.json({
+      status: 200,
+      message: `Successfully found board with id ${boardId}!`,
+      board: board,
+      // columns: columns,
+      // cards: cards,
+    });
+
+};
+
+// -----
 export const getBoardsController = async (req, res, next) => {
   const user = req.user._id;
   const boards = await getAllBoards(user);
@@ -28,51 +61,9 @@ export const getBoardsController = async (req, res, next) => {
   });
 };
 
-export const getBoardByIdController = async (req, res) => {
-  const { boardId } = req.params;
-  const user = req.user._id;
-  try {
-    // console.log('user:', user);
-    //  console.log('board tipe:', typeof boardId);
 
-    const board = await getBoardById(boardId, user);
-    const columns = await getAllColumnsByBoardId(boardId, user);
-    const cards = await getAllCardsByBoardId(boardId, user);
 
-    if (!board) {
-      throw createHttpError(404, 'Board not  found');
-    }
 
-    res.json({
-      status: 200,
-      message: `Successfully found board with id ${boardId}!`,
-      board: board,
-      columns: columns,
-      cards: cards,
-    });
-  } catch (err) {
-    throw createHttpError(404, `Board with Id: ${boardId} not found`);
-  }
-};
-
-export const createBoardController = async (req, res, next) => {
-  const photo = req.file;
-  let photoUrl = '';
-  if (photo) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
-      photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
-    }
-  }
-
-  const board = await createBoard(req.body, req.user, photoUrl);
-  res.status(201).json({
-    status: 201,
-    message: `Successfully created a board!`,
-    data: board,
-  });
-};
 
 export const deleteBoardController = async (req, res, next) => {
   const { boardId } = req.params;
@@ -128,3 +119,53 @@ export const patchBoardController = async (req, res, next) => {
     data: result.board,
   });
 };
+
+
+// =========================== Контроллери що були зміннені ================
+
+// export const createBoardController = async (req, res, next) => {
+//   const photo = req.file;
+//   let photoUrl = '';
+//   if (photo) {
+//     if (env('ENABLE_CLOUDINARY') === 'true') {
+//       photoUrl = await saveFileToCloudinary(photo);
+//     } else {
+//       photoUrl = await saveFileToUploadDir(photo);
+//     }
+//   }
+
+//   const board = await createBoard(req.body, req.user, photoUrl);
+//   res.status(201).json({
+//     status: 201,
+//     message: `Successfully created a board!`,
+//     data: board,
+//   });
+// };
+
+
+// export const getBoardByIdController = async (req, res) => {
+//   const { boardId } = req.params;
+//   const user = req.user._id;
+//   try {
+//     console.log('user:', user);
+//      console.log('board tipe:', typeof boardId);
+
+//     const board = await getBoardById(boardId, user);
+//     const columns = await getAllColumnsByBoardId(boardId, user);
+//     const cards = await getAllCardsByBoardId(boardId, user);
+
+//     if (!board) {
+//       throw createHttpError(404, 'Board not  found');
+//     }
+
+//     res.json({
+//       status: 200,
+//       message: `Successfully found board with id ${boardId}!`,
+//       board: board,
+//       columns: columns,
+//       cards: cards,
+//     });
+//   } catch (err) {
+//     throw createHttpError(404, `Board with Id: ${boardId} not found`);
+//   }
+// };
