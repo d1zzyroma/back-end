@@ -1,111 +1,60 @@
 // src/services/boards.js
 
 import { BoardsCollection } from '../db/models/board.js';
+import { ColumnsCollection } from '../db/models/columns.js';
+import { CardsCollection } from '../db/models/card.js';
 //import createHttpError from 'http-errors';
 //import { faker } from '@faker-js/faker';
-// import { calculatePaginationData } from '../utils/calculatePaginationData.js';
-// import { SORT_ORDER } from '../constants/index.js';
+//import { calculatePaginationData } from '../utils/calculatePaginationData.js';
+//import { SORT_ORDER } from '../constants/index.js';
 
-/* export const getAllBoards = async (
-  {
-    page = 1,
-    perPage = 10,
-    sortOrder = SORT_ORDER.ASC,
-    sortBy = '_id',
-    filter = {},
-  },
-  user,
-) => {
-  const limit = perPage;
-  const skip = (page - 1) * perPage;
+export const getAllBoards = async (user) => {
+  const boards = await BoardsCollection.find({ owner: user });
+  return boards;
+};
 
-  const boardsQuery = BoardsCollection.find({ userId: user });
+export const getBoardById = async (boardId, user) => {
+  const board = await BoardsCollection.findById(boardId);
+  if (board.owner.toString() === user._id.toString()) {
+    return board;
+  } else {
+    return;
+  }
+};
+export const getAllColumnsByBoardId = async (boardId, user) => {
+  const columns = await ColumnsCollection.find({
+    boardId: boardId,
+    userId: user,
+  });
+  return columns;
+};
 
-  const boardsCount = await BoardsCollection.find({ userId: user })
-    .merge(boardsQuery)
-    .countDocuments();
+export const getAllCardsByBoardId = async (boardId, user) => {
+  const cards = await CardsCollection.find({
+    boardId: boardId,
+    userId: user,
+  });
+  return cards;
+};
 
-  const boards = await boardsQuery
-    .skip(skip)
-    .limit(limit)
-    .sort({ [sortBy]: sortOrder })
-    .exec();
-
-  const paginationData = calculatePaginationData(boardsCount, perPage, page);
-
-  return {
-    data: boards,
-    ...paginationData,
-  };
-}; */
-
-
-// export const createBoard = async (payload, user, photoUrl) => {
-//   const board = await BoardsCollection.create({
-//     ...payload,
-//     userId: user._id,
-//     background: photoUrl,
-//   });
-
-//   return board;
-// };
-
-
-// ----- Create New Board
-export const createBoard =(boardData, userId) =>
-  BoardsCollection.create({
-    ...boardData,
-    userId
+export const createBoard = async (payload, user, photoUrl) => {
+  const board = await BoardsCollection.create({
+    ...payload,
+    owner: user._id,
+    background: photoUrl,
   });
 
+  return board;
+};
 
-// ----- Get All Boards By User Id -----
-// export const getAllBoards = async (user) => {
-//   const boards = await BoardsCollection.find({ userId: user });
-//   return boards;
-// };
+export const deleteBoard = async (boardId, userId) => {
+  const board = await BoardsCollection.findOneAndDelete({
+    _id: boardId,
+    owner: userId,
+  });
 
-export const getAllBoards = async (userId) =>
-  BoardsCollection.find({ userId });
-
-
-
-// ----- Get Board By Board's Id -----
-// export const getBoardById = async (boardId, user) => {
-//   const board = await BoardsCollection.findById(boardId);
-
-//   if (board.userId.toString() === user._id.toString()) {
-//     return board;
-//   } else {
-//     return;
-//   }
-// };
-
-export const getBoardById = (boardId) =>
- BoardsCollection.findById(boardId);
-
-
-
-
-
-
-
-
-
-// export const deleteBoard = async (boardId, userId) => {
-//   const board = await BoardsCollection.findOneAndDelete({
-//     _id: boardId,
-//     userId: userId,
-//   });
-//   // delete all colums with boardId in Column collections
-//   //delete all tasks with boardId in tasks collections
-//   return board;
-// };
-
-
-
-
-
+  return board;
+};
 
 export const updateBoard = async (boardId, payload, options = {}) => {
   const rawResult = await BoardsCollection.findOneAndUpdate(
