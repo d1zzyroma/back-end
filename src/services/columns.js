@@ -14,6 +14,8 @@ export const updateColumn = (columnId, titleColumn) =>
 export const deleteColumn = (columnId) =>
   ColumnsCollection.findByIdAndDelete(columnId);
 
+export const deleteColumnsByBoardId = (boardId) =>
+  ColumnsCollection.deleteMany({boardId});
 
 // =========================== Servises що були зміннені ================
 // export const createColumn = (titleColumn, userId, boardId) =>

@@ -19,20 +19,18 @@ export const createBoard = (payload, user) => BoardsCollection.create({
 
 
 
+// ----- Get All Boards By User Id -----
+export const getAllBoards = (owner) =>  BoardsCollection.find({ owner});
 
-export const getAllBoards = async (user) => {
-  const boards = await BoardsCollection.find({ owner: user });
-  return boards;
+
+
+export const getAllColumnsByBoardId = async (boardId, user) => {
+  const columns = await ColumnsCollection.find({
+    boardId: boardId,
+    userId: user,
+  });
+  return columns;
 };
-
-
-// export const getAllColumnsByBoardId = async (boardId, user) => {
-//   const columns = await ColumnsCollection.find({
-//     boardId: boardId,
-//     userId: user,
-//   });
-//   return columns;
-// };
 
 export const getAllCardsByBoardId = async (boardId, user) => {
   const cards = await CardsCollection.find({
@@ -44,19 +42,10 @@ export const getAllCardsByBoardId = async (boardId, user) => {
 
 
 
-export const deleteBoard = async (boardId, userId) => {
-  const board = await BoardsCollection.findOneAndDelete({
-    _id: boardId,
-    owner: userId,
-  });
-
-  return board;
-};
-
 export const updateBoard = async (boardId, payload, options = {}) => {
   const rawResult = await BoardsCollection.findOneAndUpdate(
     { _id: boardId },
-    payload,
+ { ...payload},
     {
       new: true,
       includeResultMetadata: true,
@@ -70,6 +59,14 @@ export const updateBoard = async (boardId, payload, options = {}) => {
     board: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
+};
+
+export const deleteBoard = async (boardId) => {
+  const board = await BoardsCollection.findOneAndDelete({
+    _id: boardId,
+  });
+
+  return board;
 };
 
 // =========================== Servises що були зміннені ================

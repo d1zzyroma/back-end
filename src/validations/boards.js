@@ -19,6 +19,8 @@ export const createBoardSchema = Joi.object({
 
 export const updateBoardSchema = Joi.object({
   title: Joi.string().min(3).max(30),
+  background: Joi.string(),
+  icon: Joi.string(),
 });
 
 const dataToValidate = {

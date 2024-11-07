@@ -6,9 +6,8 @@ import {
   getBoardsController,
   getBoardByIdController,
   createBoardController,
+  updateBoardController,
   deleteBoardController,
-  upsertBoardController,
-  patchBoardController,
 } from '../controllers/boards.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
@@ -33,8 +32,27 @@ boardsRouter.get('/:boardId',
   ctrlWrapper(getBoardByIdController)
 );
 
-// boardsRouter.get('/', ctrlWrapper(getBoardsController));
+boardsRouter.get('/',
+  ctrlWrapper(getBoardsController)
+);
 
+boardsRouter.patch(
+  '/:boardId',
+  validateBody(updateBoardSchema),
+  ctrlWrapper(updateBoardController),
+);
+
+boardsRouter.delete('/:boardId',
+  //  isValidId,
+    ctrlWrapper(deleteBoardController));
+
+  // boardsRouter.put(
+  //   '/:boardId',
+  //   // isValidId,
+  //   //upload.single('background'),
+  //   validateBody(createBoardSchema),
+  //   ctrlWrapper(upsertBoardController),
+  // );
 
 
 // boardsRouter.post(
@@ -43,25 +61,6 @@ boardsRouter.get('/:boardId',
 //   ctrlWrapper(createBoardController),
 // );
 
-
-
-// boardsRouter.delete('/:boardId', isValidId, ctrlWrapper(deleteBoardController));
-
-// boardsRouter.put(
-//   '/:boardId',
-//   isValidId,
-//   //upload.single('background'),
-//   validateBody(createBoardSchema),
-//   ctrlWrapper(upsertBoardController),
-// );
-
-// boardsRouter.patch(
-//   '/:boardId',
-//   isValidId,
-//   upload.single('background'),
-//   validateBody(updateBoardSchema),
-//   ctrlWrapper(patchBoardController),
-// );
 export default boardsRouter;
 
 
@@ -76,4 +75,12 @@ export default boardsRouter;
 //   upload.single('background'),
 //   validateBody(createBoardSchema),
 //   ctrlWrapper(createBoardController),
+// );
+
+// boardsRouter.patch(
+//   '/:boardId',
+//   isValidId,
+//   upload.single('background'),
+//   validateBody(updateBoardSchema),
+//   ctrlWrapper(patchBoardController),
 // );

@@ -6,7 +6,7 @@ import { deleteUser, updateUserProfile } from '../services/users.js';
 import bcrypt from 'bcrypt';
 
 import { findUserById } from '../services/auth.js';
-import { getAllBoards, getBoardById } from '../services/boards.js';
+import { getAllBoards} from '../services/boards.js';
 import { getAllColumnsByBoardId } from '../services/columns.js';
 import { getCardsByColumnId } from '../services/card.js';
 
