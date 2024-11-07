@@ -23,7 +23,10 @@ CardsCollection.findOneAndDelete({
     _id: cardId,
   });
 
+// ----- Delete Many Cards By Column Id -----
 
+export const deleteCardsById = (columnId) =>
+  CardsCollection.deleteMany({columnId});
 
 
 
