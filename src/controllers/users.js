@@ -6,8 +6,13 @@ import { deleteUser, updateUserProfile } from '../services/users.js';
 import bcrypt from 'bcrypt';
 
 import { findUserById } from '../services/auth.js';
+import { getAllBoards, getBoardById } from '../services/boards.js';
+import { getAllColumnsByBoardId } from '../services/columns.js';
+import { getCardsByColumnId } from '../services/card.js';
 
-// ----- Get Carent Users
+
+
+//----- Get All Carent Users's Informations -----
 export const getCurrentUserController = async (req, res) => {
 const userId = req.user._id;
   const user = await findUserById(userId);
@@ -15,16 +20,34 @@ const userId = req.user._id;
   if (!user) {
     throw createHttpError(401, 'User unauthorized');
   }
+
+  const boards = await getAllBoards(userId);
+  const boardsId = boards.map(item => item._id);
+  const allBoardsColumns = [];
+
+  for(const id of boardsId){
+    allBoardsColumns.push(... await getAllColumnsByBoardId(id));
+  }
+
+  const allColumsId = allBoardsColumns.map(item => item._id);
+  const cards = [];
+  for(const item of allColumsId)
+    {
+      const cardsArray = await getCardsByColumnId(item);
+      cards.push(...cardsArray);
+
+    };
+
   res.status(200).json({
     status: 200,
     message: ` Successfully found user with id ${userId} !`,
-    data: {
+    data: {user: {
       _id: user._id,
       name: user.name,
       email: user.email,
       avatarURL: user.avatarURL,
       theme: user.theme,
-    }
+    },boards, columns: allBoardsColumns, cards},
   });
 };
 
@@ -59,7 +82,7 @@ export const updateUserProfileController = async (req, res) => {
 
 };
 
-// ----- Change Thema
+// ----- Change Thema -----
 export const changeThemeController = async(req, res) => {
   const { _id } = req.user;
   const theme = req.body;
@@ -161,3 +184,27 @@ export const deleteUserController = async (req, res) => {
 
   res.status(204).json({ message: 'Successful operation' });
 };
+
+
+// ----- Get Carent Users Without Boars
+// export const getCurrentUserController = async (req, res) => {
+// const userId = req.user._id;
+//   const user = await findUserById(userId);
+
+//   if (!user) {
+//     throw createHttpError(401, 'User unauthorized');
+//   }
+
+
+//   res.status(200).json({
+//     status: 200,
+//     message: ` Successfully found user with id ${userId} !`,
+//     data: {
+//       _id: user._id,
+//       name: user.name,
+//       email: user.email,
+//       avatarURL: user.avatarURL,
+//       theme: user.theme,
+//     }
+//   });
+// };
