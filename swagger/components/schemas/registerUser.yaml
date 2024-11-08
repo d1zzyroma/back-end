@@ -1,4 +1,8 @@
 type: 'object'
+required:
+  - name
+  - email
+  - password
 properties:
   name:
     type: 'string'
@@ -13,7 +17,4 @@ properties:
     type: 'string'
     example: 'password123'
     minLength: 8
-required:
-  - name
-  - email
-  - password
+
