@@ -13,7 +13,7 @@ tags:
     description: Operations about users support
 servers:
   - url: http://localhost:3000
-  - url: https://example.com/api/v1
+  - url: https://task-manager-backend-y4a1.onrender.com
 paths:
   /user/{current}:
     get:
@@ -35,7 +35,7 @@ paths:
       $ref: ../swagger/paths/auth/register.yaml
   /auth/login:
     post:
-      $ref: ../swagger/paths/auth/login.yaml
+      $ref: ../swagger/paths/auth/post.yaml
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout.yaml

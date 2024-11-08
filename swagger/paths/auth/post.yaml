@@ -1,0 +1,56 @@
+tags:
+  - Auth
+summary: 'Login user and create session'
+operationId: 'loginUser'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "Users's email"
+            type: string
+            example: user_email@mail.com
+          password:
+            description: "Users's password"
+            type: string
+            example: 12345678
+responses:
+  '200':
+    description: log in user
+    content:
+      application/json:
+        schema:
+          type: 'object'
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: 'integer'
+              example: 200
+            message:
+              type: 'string'
+              example: 'Successfully logged in!'
+            data:
+              type: 'object'
+              $ref: ../../components/schemas/loginUser.yaml
+              properties:
+                accessToken:
+                  type: 'string'
+                  example: 'yourAccessToken'
+                user:
+                  $ref: '../components/schemas/user.yaml'
+  '401':
+    description: 'Unauthorized. Please check your credentials!'
+    content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/error.yaml
