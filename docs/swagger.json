@@ -21,317 +21,43 @@
     {
       "name": "Auth",
       "description": "Auth operations."
-    },
-    {
-      "name": "Support",
-      "description": "Operations about users support"
     }
   ],
   "paths": {
-    "/user/{current}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get User by id",
-        "operationId": "getUser",
-        "description": "Get User by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "current",
-            "required": true,
-            "schema": {
-              "description": "MongoDB id",
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get User by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found User with id 65ca67e7ae7f10c88b598384!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          }
-        }
-      }
-    },
-    "/user/profile{id}": {
-      "patch": {
-        "tags": [
-          "Profile"
-        ],
-        "summary": "Partially update a profile",
-        "operationId": "patchProfile",
-        "description": "Partially updates a profile's information.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the profile to update."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "avatarURL": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated the profile.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/user/theme{id}": {
-      "patch": {
-        "tags": [
-          "Theme"
-        ],
-        "summary": "Partially update a theme",
-        "operationId": "patchTheme",
-        "description": "Partially updates a theme's information.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the theme to update."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "avatarURL": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated the theme.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/user/delete-user{id}": {
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Delete a user",
-        "operationId": "deleteUser",
-        "description": "Deletes a user by its ID.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the user to delete."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfully deleted the user."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/support/send-message": {
+    "/auth/register": {
       "post": {
         "tags": [
-          "Support"
+          "Auth"
         ],
-        "summary": "Send email to support",
-        "operationId": "sendEmailToSupport",
-        "description": "Create a contact with payload",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "summary": "Register a new user",
+        "operationId": "registerUser",
+        "description": "Create a New User",
+        "security": [],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
+                  "name",
                   "email",
-                  "message"
+                  "password"
                 ],
                 "properties": {
-                  "email": {
-                    "description": "User's email",
+                  "name": {
                     "type": "string",
-                    "example": "testuser@mail.com"
+                    "example": "John Doe",
+                    "description": "The user's name."
                   },
-                  "message": {
-                    "description": "Message that will be sent to support",
-                    "type": "string"
+                  "email": {
+                    "type": "string",
+                    "example": "john.doe@example.com",
+                    "description": "The user's email address."
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123",
+                    "description": "The user's password."
                   }
                 }
               }
@@ -340,7 +66,7 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a contact",
+            "description": "Creates a new contact",
             "content": {
               "application/json": {
                 "schema": {
@@ -361,7 +87,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/registerUser"
                     }
                   }
                 }
@@ -370,98 +96,6 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Login user and create session",
-        "operationId": "loginUser",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
-                "properties": {
-                  "email": {
-                    "description": "Users's email",
-                    "type": "string",
-                    "example": "user_email@mail.com"
-                  },
-                  "password": {
-                    "description": "Users's password",
-                    "type": "string",
-                    "example": 12345678
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "log in user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully logged in!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/loginUser",
-                      "properties": {
-                        "accessToken": {
-                          "type": "string",
-                          "example": "yourAccessToken"
-                        },
-                        "user": {
-                          "$ref": "../components/schemas/user.yaml"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Please check your credentials!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/error"
-                }
-              }
-            }
           }
         }
       }
@@ -469,92 +103,16 @@
   },
   "components": {
     "schemas": {
-      "User": {
-        "$ref": "#/components/schemas/user"
-      },
       "RegisterUser": {
         "$ref": "#/components/schemas/registerUser"
       },
-      "LoginUser": {
-        "$ref": "#/components/schemas/loginUser"
-      },
-      "Error": {
-        "$ref": "#/components/schemas/error"
-      },
-      "user": {
+      "registerUser": {
         "type": "object",
         "required": [
-          "_id",
-          "name"
-        ],
-        "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "66f8ce62907b1bc9bc45a365"
-          },
-          "name": {
-            "description": "User's name",
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "description": "User's email",
-            "type": "string",
-            "example": "testcontact@mail.com"
-          },
-          "photo": {
-            "description": "Link to User's photo",
-            "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
-          }
-        }
-      },
-      "loginUser": {
-        "type": "object",
-        "required": [
-          "_id",
+          "name",
           "email",
           "password"
         ],
-        "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "66f8ce62907b1bc9bc45a365"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "example": "john.doe@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "password123"
-          }
-        }
-      },
-      "error": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 400
-          },
-          "message": {
-            "type": "string",
-            "example": "Bad request"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "registerUser": {
-        "type": "object",
         "properties": {
           "name": {
             "type": "string",
@@ -572,12 +130,7 @@
             "example": "password123",
             "minLength": 8
           }
-        },
-        "required": [
-          "name",
-          "email",
-          "password"
-        ]
+        }
       }
     },
     "securitySchemes": {
@@ -617,37 +170,6 @@
                       "type": "string",
                       "example": "Access token expired"
                     }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "404": {
-        "description": "Not Found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "NotFoundError"
-                },
-                "data": {
-                  "type": "object",
-                  "example": {
-                    "message": "Contact not found"
                   }
                 }
               }
