@@ -28,7 +28,7 @@ export const getBoardByIdController = async (req, res) => {
 
   const board = await getBoardById(boardId);
   const columns = await getAllColumnsByBoardId(boardId);
-const columnsAll = []
+const columnsAll = [];
 
 for(const column of columns){
   const {_id, title, boardId} = column;
@@ -40,7 +40,6 @@ colunmInfo.boardId = boardId;
 colunmInfo.cards = cardsArray;
 columnsAll.push(colunmInfo);
 }
-// console.log(colunmInfo);
 
   if (!board) {
     throw createHttpError(404, 'Board not  found');
@@ -50,38 +49,9 @@ columnsAll.push(colunmInfo);
     status: 200,
     message: `Successfully found board with id ${boardId}!`,
     data: {board, columnsAll},
-
-  //   data: {board, columns: [...columns],cards: [...cards]},
   });
 
 };
-// export const getBoardByIdController = async (req, res) => {
-//     const { boardId } = req.params;
-
-//     const board = await getBoardById(boardId);
-//     const columns = await getAllColumnsByBoardId(boardId);
-
-//     const columnsId = columns.map(column => column._id);
-//     const cards = [];
-
-// for(const item of columnsId)
-//   {
-//     const cardsArray = await getCardsByColumnId(item);
-//     cards.push(...cardsArray);
-
-//   };
-
-//     if (!board) {
-//       throw createHttpError(404, 'Board not  found');
-//     }
-
-//     res.json({
-//       status: 200,
-//       message: `Successfully found board with id ${boardId}!`,
-//       data: {board, columns: [...columns],cards: [...cards]},
-//     });
-
-// };
 
 // ----- Get All Boards By User Id -----
 export const getBoardsController = async (req, res, next) => {
@@ -227,4 +197,33 @@ export const deleteBoardController = async (req, res, next) => {
 //     message: `Successfully patched a board Id: ${boardId}!`,
 //     data: result.board,
 //   });
+// };
+
+
+// export const getBoardByIdController = async (req, res) => {
+//     const { boardId } = req.params;
+
+//     const board = await getBoardById(boardId);
+//     const columns = await getAllColumnsByBoardId(boardId);
+
+//     const columnsId = columns.map(column => column._id);
+//     const cards = [];
+
+// for(const item of columnsId)
+//   {
+//     const cardsArray = await getCardsByColumnId(item);
+//     cards.push(...cardsArray);
+
+//   };
+
+//     if (!board) {
+//       throw createHttpError(404, 'Board not  found');
+//     }
+
+//     res.json({
+//       status: 200,
+//       message: `Successfully found board with id ${boardId}!`,
+//       data: {board, columns: [...columns],cards: [...cards]},
+//     });
+
 // };
