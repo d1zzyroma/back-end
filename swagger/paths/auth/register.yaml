@@ -47,5 +47,31 @@ responses:
             data:
               type: object
               $ref: ../../components/schemas/registerUser.yaml
-  '401':
-    $ref: ../../components/responses/401.yaml
+  '400':
+    $ref: ../../components/responses/400.yaml
+  '409':
+    description: Response when email address is already in use in database
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: ConflictError
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: This email address already exists in the database and cannot be reused.
+
+
+

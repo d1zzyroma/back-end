@@ -94,8 +94,8 @@
               }
             }
           },
-          "401": {
-            "$ref": "#/components/responses/401"
+          "400": {
+            "$ref": "#/components/responses/400"
           }
         }
       }
@@ -140,37 +140,24 @@
       }
     },
     "responses": {
-      "401": {
-        "description": "Unauthorized error",
+      "400": {
+        "description": "Bad request",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "required": [
                 "status",
-                "message",
-                "data"
+                "message"
               ],
               "properties": {
                 "status": {
                   "type": "integer",
-                  "example": 401
+                  "example": 400
                 },
                 "message": {
                   "type": "string",
-                  "example": "UnauthorizedError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Access token expired"
-                    }
-                  }
+                  "example": "Please check the provided data"
                 }
               }
             }
