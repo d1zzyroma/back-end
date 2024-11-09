@@ -3,6 +3,7 @@ import {
   createSession,
   deleteSession,
   findUserByEmail,
+  getGoogleOauthLink,
   // refreshSession,
   registerUser,
 } from '../services/auth.js';
@@ -40,7 +41,7 @@ export const loginUserController = async (req, res) => {
     message: 'Saccessfully logged in!',
     data: {
       accessToken: session.accessToken,
-      user
+      user,
     },
   });
 };
@@ -55,6 +56,16 @@ export const logoutUserController = async (req, res) => {
   res.clearCookie('refreshToken');
 
   res.status(204).send();
+};
+
+export const requestGoogleOauthUrlController = async (req, res) => {
+  const link = getGoogleOauthLink();
+
+  res.json({
+    status: 200,
+    message: 'Successfully requested oauth link!',
+    data: { link },
+  });
 };
 
 // ----- Refresh Session -----

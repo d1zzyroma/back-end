@@ -8,6 +8,7 @@ import {
 } from '../constants/time.js';
 import { UserCollection } from '../db/models/user.js';
 import { SessionCollection } from '../db/models/session.js';
+import { generateOauthLink } from '../utils/googleOauth.js';
 
 // ----- User Register -----
 export const registerUser = async (registrationData) => {
@@ -48,6 +49,10 @@ export const createSession = async (userId) => {
 // ----- Delete Session
 export const deleteSession = (sessionId) =>
   SessionCollection.deleteOne({ _id: sessionId });
+
+export const getGoogleOauthLink = async (req, res) => {
+  return generateOauthLink();
+};
 
 // ----- Refresh session -----
 // export const refreshSession = async (sessionId, sessionToken) => {
