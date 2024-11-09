@@ -14,324 +14,50 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://example.com/api/v1"
+      "url": "https://task-manager-backend-y4a1.onrender.com"
     }
   ],
   "tags": [
     {
       "name": "Auth",
       "description": "Auth operations."
-    },
-    {
-      "name": "Support",
-      "description": "Operations about users support"
     }
   ],
   "paths": {
-    "/user/{current}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get User by id",
-        "operationId": "getUser",
-        "description": "Get User by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "current",
-            "required": true,
-            "schema": {
-              "description": "MongoDB id",
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get User by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found User with id 65ca67e7ae7f10c88b598384!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          }
-        }
-      }
-    },
-    "/user/profile": {
-      "patch": {
-        "tags": [
-          "Profile"
-        ],
-        "summary": "Partially update a profile",
-        "operationId": "patchProfile",
-        "description": "Partially updates a profile's information.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "profile",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the profile to update."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "avatarURL": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated the profile.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/user/theme": {
-      "patch": {
-        "tags": [
-          "Theme"
-        ],
-        "summary": "Partially update a theme",
-        "operationId": "patchTheme",
-        "description": "Partially updates a theme's information.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the theme to update."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "avatarURL": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated the theme.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/user/delete-user": {
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Delete a user",
-        "operationId": "deleteUser",
-        "description": "Deletes a user by its ID.",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the user to delete."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfully deleted the user."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "Contact not found."
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/support/send-message": {
+    "/auth/register": {
       "post": {
         "tags": [
-          "Support"
+          "Auth"
         ],
-        "summary": "Send email to support",
-        "operationId": "sendEmailToSupport",
-        "description": "Create a contact with payload",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "summary": "Register a new user",
+        "operationId": "registerUser",
+        "description": "Create a New User",
+        "security": [],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
+                  "name",
                   "email",
-                  "message"
+                  "password"
                 ],
                 "properties": {
-                  "email": {
-                    "description": "User's email",
+                  "name": {
                     "type": "string",
-                    "example": "testuser@mail.com"
+                    "example": "John Doe",
+                    "description": "The user's name."
                   },
-                  "message": {
-                    "description": "Message that will be sent to support",
-                    "type": "string"
+                  "email": {
+                    "type": "string",
+                    "example": "john.doe@example.com",
+                    "description": "The user's email address."
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123",
+                    "description": "The user's password."
                   }
                 }
               }
@@ -340,7 +66,7 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a contact",
+            "description": "Creates a new contact",
             "content": {
               "application/json": {
                 "schema": {
@@ -361,7 +87,151 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/registerUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "409": {
+            "description": "Response when email address is already in use in database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "ConflictError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "This email address already exists in the database and cannot be reused."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user and create session",
+        "operationId": "loginUser",
+        "description": "Login user",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "john.doe@example.com",
+                    "description": "The user's email address."
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123",
+                    "description": "The user's password."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "Z2jvmaNKNxdwAm85WDbqrA=="
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string",
+                              "example": "672cdd90db9f029835cc2bdc",
+                              "description": "User ID created by the database Mongo DB"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "John Doe",
+                              "description": "The user's name"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "john.doe@example.com",
+                              "description": "The user's email address."
+                            },
+                            "password": {
+                              "type": "string",
+                              "example": "password123",
+                              "description": "The user's password."
+                            },
+                            "theme": {
+                              "type": "string",
+                              "example": "light",
+                              "description": "the application theme is selected by the user"
+                            },
+                            "avatarUrl": {
+                              "type": "string",
+                              "example": "https://res.cloudinary.com/denqnnmh2/image/upload/v1731087488/zn0arkh2mdtljnh5mhcf.webp\"",
+                              "description": "avatar uploaded by user (if user uploaded)"
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -369,116 +239,129 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "description": "Unauthorized. Please check your credentials!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Ends the user session by deleting the session data.",
+        "operationId": "logoutUser",
+        "description": "Successfully logged out, no content returned.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User logged out successfully"
           },
-          "404": {
-            "$ref": "#/components/responses/404"
+          "401": {
+            "description": "Bad request. No session found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
           }
         }
       }
     }
   },
   "components": {
+    "schemas": {
+      "RegisterUser": {
+        "$ref": "#/components/schemas/registerUser"
+      },
+      "registerUser": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "minLength": 3,
+            "maxLength": 30
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "minLength": 8
+          },
+          "theme": {
+            "type": "string",
+            "example": "light"
+          }
+        }
+      },
+      "error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad request"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
       }
     },
-    "schemas": {
-      "user": {
-        "type": "object",
-        "required": [
-          "_id",
-          "name"
-        ],
-        "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "66f8ce62907b1bc9bc45a365"
-          },
-          "name": {
-            "description": "User's name",
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "description": "User's email",
-            "type": "string",
-            "example": "testcontact@mail.com"
-          },
-          "photo": {
-            "description": "Link to User's photo",
-            "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
-          }
-        }
-      }
-    },
     "responses": {
-      "401": {
-        "description": "Unauthorized error",
+      "400": {
+        "description": "Bad request",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "required": [
                 "status",
-                "message",
-                "data"
+                "message"
               ],
               "properties": {
                 "status": {
                   "type": "integer",
-                  "example": 401
+                  "example": 400
                 },
                 "message": {
                   "type": "string",
-                  "example": "UnauthorizedError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Access token expired"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "404": {
-        "description": "Not Found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "NotFoundError"
-                },
-                "data": {
-                  "type": "object",
-                  "example": {
-                    "message": "Contact not found"
-                  }
+                  "example": "Please check the provided data"
                 }
               }
             }
