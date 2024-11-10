@@ -1,0 +1,84 @@
+tags:
+  - Cards
+summary: Update card by id
+operationId: updateCard
+description: 'Update card by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - _id
+          - title
+          - description
+          - deadline
+          - priority
+
+          properties:
+            title:
+              description: "Card's title"
+              type: string
+              example: 'New card title'
+          description:
+            description: "Card's description"
+            type: string
+            example: 'New task description'
+          deadline:
+            description: "Card's deadline"
+            type: string
+            example: '12.11.2024'
+          priority:
+            description: "Card's priority"
+            type: string
+            enum: ['Low', 'Medium', 'High', 'Without priority']
+responses:
+  '201':
+    description: 'Successfully updated a card!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully updated a card!'
+            data:
+              type: object
+  '404':
+    description: 'Not Found'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              example:
+                message: 'Card not found'
