@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { env } from './env.js';
 import { MONGO_DB_VARS } from '../constants/index.js';
+import createHttpError from 'http-errors';
 
 const googleConfigPath = path.join(process.cwd(), 'google.json');
 
@@ -25,4 +26,20 @@ export const generateOauthLink = () => {
       'https://www.googleapis.com/auth/userinfo.email',
     ],
   });
+};
+
+export const verifyCode = async (code) => {
+  try {
+    const { tokens } = await oauthClient.getToken(code);
+    const idToken = tokens.id_token;
+
+    const ticket = await oauthClient.verifyIdToken({ idToken });
+
+    return ticket.payload;
+  } catch (err) {
+    if (err.status === 400) {
+      throw createHttpError(err.status, 'Token is invalid');
+    }
+    throw createHttpError(500, 'Something is wrong with Google Oauth!');
+  }
 };
