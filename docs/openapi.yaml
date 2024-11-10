@@ -9,6 +9,8 @@ info:
 tags:
   - name: Auth
     description: Auth operations.
+  - name: User
+    description: User's operation.
 servers:
   - url: http://localhost:3000
   - url: https://task-manager-backend-y4a1.onrender.com
@@ -24,18 +26,18 @@ paths:
       $ref: ../swagger/paths/auth/logout.yaml
 
 
-  # /user/{current}:
-  #   get:
-  #     $ref: ../swagger/paths/user/current/get.yaml
-  # /user/profile:
-  #   patch:
-  #     $ref: ../swagger/paths/user/profile/patch.yaml
-  # /user/theme:
-  #   patch:
-  #     $ref: ../swagger/paths/user/theme/patch.yaml
-  # /user/delete-user:
-  #   delete:
-  #     $ref: ../swagger/paths/user/delete-user/delete.yaml
+  /user/current:
+    get:
+      $ref: ../swagger/paths/user/getCurrent.yaml
+  /user/profile:
+    patch:
+      $ref: '../swagger/paths/user/updateProfile.yaml'
+  /user/theme:
+    patch:
+      $ref: '../swagger/paths/user/changeTheme.yaml'
+  /user/delete-user:
+    delete:
+      $ref: '../swagger/paths/user/deleteUser.yaml'
   # /support/send-message:
   #   post:
   #     $ref: ../swagger/paths/support/post.yaml
