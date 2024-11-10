@@ -36,7 +36,6 @@ paths:
     post:
       $ref: ../swagger/paths/auth/logout.yaml
 
-
   # /user/{current}:
   #   get:
   #     $ref: ../swagger/paths/user/current/get.yaml
@@ -65,8 +64,8 @@ components:
   schemas:
     # User:
     #   $ref: '../swagger/components/schemas/user.yaml'
-      Cards
-        $ref: '../swagger/components/schemas/cards.yaml'
+    Cards
+      $ref: '../swagger/components/schemas/card.yaml'
     RegisterUser:
       $ref: '../swagger/components/schemas/registerUser.yaml'
     # LoginUser:
