@@ -29,6 +29,14 @@ paths:
   /cards/replace/{id}:
     patch:
       $ref: ../swagger/paths/cards/replace/{id}/patch.yaml
+  /auth/login:
+    post:
+      $ref: ../swagger/paths/auth/login.yaml
+  /auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout.yaml
+
+
   # /user/{current}:
   #   get:
   #     $ref: ../swagger/paths/user/current/get.yaml
