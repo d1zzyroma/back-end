@@ -17,6 +17,8 @@ tags:
     description: Board operation.
   - name: Column
     description: Columns operation.
+  - name: Cards
+    description: Cards operations.
 servers:
   - url: http://localhost:3000
   - url: https://task-manager-backend-y4a1.onrender.com
@@ -68,13 +70,27 @@ paths:
       $ref: '../swagger/paths/columns/updateColumn.yaml'
     delete:
       $ref: '../swagger/paths/columns/deleteColumn.yaml'
+      
+   /cards/{columnId}:
+    post:
+      $ref: ../swagger/paths/cards/{columnId}/post.yaml
+  /cards/{id}:
+    patch:
+      $ref: ../swagger/paths/cards/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/cards/{id}/delete.yaml
+  /cards/replace/{id}:
+    patch:
+      $ref: ../swagger/paths/cards/replace/{id}/patch.yaml
 
 components:
   schemas:
     # User:
     #   $ref: '../swagger/components/schemas/user.yaml'
-    RegisterUser:
-      $ref: '../swagger/components/schemas/registerUser.yaml'
+#     Cards
+#       $ref: '../swagger/components/schemas/card.yaml'
+#     RegisterUser:
+#       $ref: '../swagger/components/schemas/registerUser.yaml'
     # LoginUser:
     #   $ref: '../swagger/components/schemas/loginUser.yaml'
     # Error:
