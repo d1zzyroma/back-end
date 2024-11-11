@@ -38,9 +38,9 @@ paths:
   /user/delete-user:
     delete:
       $ref: '../swagger/paths/user/deleteUser.yaml'
-  # /support/send-message:
-  #   post:
-  #     $ref: ../swagger/paths/support/post.yaml
+  /support/send-message:
+    post:
+      $ref: '../swagger/paths/support/support.yaml'
   # /auth/register:
   #   post:
   #     $ref: ../swagger/paths/auth/register.yaml
