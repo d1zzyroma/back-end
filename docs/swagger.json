@@ -86,7 +86,7 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a new contact",
+            "description": "Creates a new user",
             "content": {
               "application/json": {
                 "schema": {
@@ -103,7 +103,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully created a contact!"
+                      "example": "Successfully created a user!"
                     },
                     "data": {
                       "type": "object",
@@ -767,7 +767,7 @@
         }
       }
     },
-    "/boards/:boardId": {
+    "/boards/{boardId}": {
       "get": {
         "tags": [
           "Boards"
@@ -783,7 +783,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "boardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -890,7 +890,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "boardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -974,7 +974,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "boardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -992,7 +992,7 @@
         }
       }
     },
-    "/columns/:boardId": {
+    "/columns/{boardId}": {
       "post": {
         "tags": [
           "Column"
@@ -1008,7 +1008,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "boardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1071,7 +1071,7 @@
         }
       }
     },
-    "/columns/:columnId": {
+    "/columns/{columnId}": {
       "patch": {
         "tags": [
           "Column"
@@ -1087,7 +1087,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "columnId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1161,7 +1161,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "columnId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1179,7 +1179,7 @@
         }
       }
     },
-    "/cards/:columnId": {
+    "/cards/{columnId}": {
       "post": {
         "tags": [
           "Cards"
@@ -1195,7 +1195,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "columnId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1281,7 +1281,7 @@
         }
       }
     },
-    "/cards/cardId": {
+    "/cards/{cardId}": {
       "patch": {
         "tags": [
           "Cards"
@@ -1297,7 +1297,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "cardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1391,7 +1391,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "cardId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1437,7 +1437,7 @@
         }
       }
     },
-    "/cards/replace/cardId": {
+    "/cards/replace/{cardId}": {
       "patch": {
         "tags": [
           "Cards"
@@ -1453,7 +1453,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "cardId",
             "required": true,
             "schema": {
               "type": "string",

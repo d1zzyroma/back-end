@@ -54,7 +54,7 @@ paths:
   /boards:
     post:
       $ref: '../swagger/paths/boards/createBoard.yaml'
-  /boards/:boardId:
+  /boards/{boardId}:
     get:
       $ref: '../swagger/paths/boards/{id}/getBoardById.yaml'
     patch:
@@ -62,24 +62,24 @@ paths:
     delete:
       $ref: '../swagger/paths/boards/{id}/deleteBoard.yaml'
   # Columns
-  /columns/:boardId:
+  /columns/{boardId}:
     post:
       $ref: '../swagger/paths/columns/crateColumn.yaml'
-  /columns/:columnId:
+  /columns/{columnId}:
     patch:
       $ref: '../swagger/paths/columns/updateColumn.yaml'
     delete:
       $ref: '../swagger/paths/columns/deleteColumn.yaml'
   # Cards
-  /cards/:columnId:
+  /cards/{columnId}:
     post:
       $ref: '../swagger/paths/cards/{columnId}/post.yaml'
-  /cards/cardId:
+  /cards/{cardId}:
     patch:
       $ref: '../swagger/paths/cards/{id}/patch.yaml'
     delete:
       $ref: '../swagger/paths/cards/{id}/delete.yaml'
-  /cards/replace/cardId:
+  /cards/replace/{cardId}:
     patch:
       $ref: '../swagger/paths/cards/{id}/replace.yaml'
 
