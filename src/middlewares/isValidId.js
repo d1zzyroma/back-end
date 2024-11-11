@@ -5,7 +5,7 @@ export const isValidId =
   (idName = 'id') =>
   (req, res, next) => {
     const id = req.params[idName];
-    console.log(idName);
+    // console.log(idName);
 
     if (!isValidObjectId(id)) {
       throw createHttpError(400, 'Bad Request  ( Invalid Board  ID )');

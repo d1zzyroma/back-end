@@ -1,0 +1,47 @@
+tags:
+  - Column
+summary: Create column
+operationId: createColumn
+description: 'Create column with board Id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '67ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: "column's name"
+            type: string
+            example: 'To Do something'
+responses:
+  '201':
+    description: Creates a board
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Column created successfully
+            data:
+              type: object
+              $ref: '../../components/responses/responseSchemas/columnSchema.yaml'
+  '404':
+    $ref: ../../components/responses/responseErrorSchemas/404.yaml

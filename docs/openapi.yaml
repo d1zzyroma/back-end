@@ -14,7 +14,9 @@ tags:
   - name: Support
     description: Support operation.
   - name: Boards
-    description: Board operation
+    description: Board operation.
+  - name: Column
+    description: Columns operation.
 servers:
   - url: http://localhost:3000
   - url: https://task-manager-backend-y4a1.onrender.com
@@ -50,14 +52,22 @@ paths:
   /boards:
     post:
       $ref: '../swagger/paths/boards/createBoard.yaml'
-  /boards/boardId:
+  /boards/:boardId:
     get:
       $ref: '../swagger/paths/boards/{id}/getBoardById.yaml'
     patch:
       $ref: '../swagger/paths/boards/{id}/updateBoard.yaml'
     delete:
       $ref: '../swagger/paths/boards/{id}/deleteBoard.yaml'
-
+  # Columns
+  /columns/:boardId:
+    post:
+      $ref: '../swagger/paths/columns/crateColumn.yaml'
+  /columns/:columnId:
+    patch:
+      $ref: '../swagger/paths/columns/updateColumn.yaml'
+    delete:
+      $ref: '../swagger/paths/columns/deleteColumn.yaml'
 
 components:
   schemas:

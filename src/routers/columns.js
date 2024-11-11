@@ -14,24 +14,23 @@ import { isValidId } from '../middlewares/isValidId.js';
 
 const columnsRouter = Router();
 columnsRouter.use('/', authenticate);
+columnsRouter.use('/:boardId', isValidId('boardId'));
+columnsRouter.use('/:columnId', isValidId('columnId'));
 
 columnsRouter.post(
   '/:boardId',
-  // isValidId,
   validateBody(createColumnsSchema),
   ctrlWrapper(createColumnController),
 );
 
 columnsRouter.patch(
   '/:columnId',
-  // isValidId,
   validateBody(updateColumnsSchema),
   ctrlWrapper(updateColumnController),
 );
 
 columnsRouter.delete(
   '/:columnId',
-  // isValidId,co
   ctrlWrapper(deleteColumnController),
 );
 
