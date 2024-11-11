@@ -5,7 +5,7 @@ import {
 } from '../constants/time.js';
 import { UserCollection } from '../db/models/user.js';
 import { SessionCollection } from '../db/models/session.js';
-import { generateOauthLink, verifyCode } from '../utils/googleOauth.js';
+import { verifyCode } from '../utils/googleOauth.js';
 import bcrypt from 'bcrypt';
 // ----- Find User By Email -----
 export const findUserByEmail = (email) => UserCollection.findOne({ email });
@@ -40,10 +40,7 @@ export const createSession = async (userId) => {
 export const deleteSession = (sessionId) =>
   SessionCollection.deleteOne({ _id: sessionId });
 
-export const getGoogleOauthLink = (req, res) => {
-  return generateOauthLink();
-};
-
+// ----- Verify Google Oauth -----
 export const verifyGoogleOauth = async (code) => {
   const { email, name, picture } = await verifyCode(code);
 
@@ -93,3 +90,30 @@ export const verifyGoogleOauth = async (code) => {
 //   });
 //   return newSession;
 // };
+
+
+// Google Oauth befor changes
+// export const getGoogleOauthLink = (req, res) => {
+//   return generateOauthLink();
+// };
+
+// export const verifyGoogleOauth = async (code) => {
+//   const { email, name, picture } = await verifyCode(code);
+
+//   let user = await UserCollection.findOne({ email });
+
+//   if (!user) {
+//     const password = await bcrypt.hash(randomBytes(40), 10);
+//     user = await UserCollection.create({
+//       name,
+//       email,
+//       avatarURL: picture,
+//       password,
+//     });
+//   }
+//   await SessionCollection.deleteOne({
+//     userId: user._id,
+//   });
+
+//   const session = await createSession(user._id);
+//   return session;

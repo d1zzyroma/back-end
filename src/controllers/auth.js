@@ -10,6 +10,7 @@ import {
 } from '../services/auth.js';
 import bcrypt from 'bcrypt';
 import { setupSessionCookies } from '../utils/setupSessionCookies.js';
+import { generateOauthLink } from '../utils/googleOauth.js';
 
 //  ----- User Register -----
 export const registerUserController = async (req, res) => {
@@ -67,8 +68,9 @@ export const logoutUserController = async (req, res) => {
   res.status(204).send();
 };
 
+// ----- Request GoogleOauth Url -----
 export const requestGoogleOauthUrlController = (req, res) => {
-  const link = getGoogleOauthLink();
+  const link = generateOauthLink();
 
   res.json({
     status: 200,
@@ -77,6 +79,7 @@ export const requestGoogleOauthUrlController = (req, res) => {
   });
 };
 
+// ----- Verify Google Oauth -----
 export const verifyGoogleOauthControler = async (req, res) => {
   const session = await verifyGoogleOauth(req.body.code);
 
@@ -88,6 +91,7 @@ export const verifyGoogleOauthControler = async (req, res) => {
     data: { accessToken: session.accessToken },
   });
 };
+
 // ----- Refresh Session -----
 // export const refreshUserSessionController = async (req, res) => {
 //   try {
@@ -111,4 +115,29 @@ export const verifyGoogleOauthControler = async (req, res) => {
 //       data: { message: error.message },
 //     });
 //   }
+// };
+
+// Google Oauth befor changes
+// // ----- Request GoogleOauth Url -----
+// export const requestGoogleOauthUrlController = (req, res) => {
+//   const link = getGoogleOauthLink();
+
+//   res.json({
+//     status: 200,
+//     message: 'Successfully requested oauth link!',
+//     data: { link },
+//   });
+// };
+
+// // ----- Verify Google Oauth -----
+// export const verifyGoogleOauthControler = async (req, res) => {
+//   const session = await verifyGoogleOauth(req.body.code);
+
+//   setupSessionCookies(res, session);
+
+//   res.json({
+//     status: 200,
+//     message: 'Successfully loged in via Google Oauth!',
+//     data: { accessToken: session.accessToken },
+//   });
 // };
