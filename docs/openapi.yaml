@@ -41,15 +41,6 @@ paths:
   /support/send-message:
     post:
       $ref: '../swagger/paths/support/support.yaml'
-  # /auth/register:
-  #   post:
-  #     $ref: ../swagger/paths/auth/register.yaml
-  # /auth/login:
-  #   post:
-  #     $ref: ../swagger/paths/auth/post.yaml
-  # /auth/logout:
-  #   post:
-  #     $ref: ../swagger/paths/auth/logout.yaml
 components:
   schemas:
     # User:

@@ -65,7 +65,7 @@ responses:
                   description: the application theme is selected by the User
                   default: light
   '400':
-    $ref: ../../components/responses/400.yaml
+    $ref: ../../components/responses/responseErrorSchemas/400.yaml
   '409':
     description: Response when email address is already in use in database
     content:
