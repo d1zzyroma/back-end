@@ -61,10 +61,9 @@ export const verifyGoogleOauth = async (code) => {
   await SessionCollection.deleteOne({
     userId: user._id,
   });
-  return await SessionCollection.create({
-    userId: user._id,
-    ...createSession,
-  });
+
+  const session = await createSession(user._id);
+  return session;
 };
 // ----- Refresh session -----
 // export const refreshSession = async (sessionId, sessionToken) => {
