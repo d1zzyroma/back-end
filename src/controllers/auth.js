@@ -115,28 +115,3 @@ export const verifyGoogleOauthControler = async (req, res) => {
 //     });
 //   }
 // };
-
-// Google Oauth befor changes
-// // ----- Request GoogleOauth Url -----
-// export const requestGoogleOauthUrlController = (req, res) => {
-//   const link = getGoogleOauthLink();
-
-//   res.json({
-//     status: 200,
-//     message: 'Successfully requested oauth link!',
-//     data: { link },
-//   });
-// };
-
-// // ----- Verify Google Oauth -----
-// export const verifyGoogleOauthControler = async (req, res) => {
-//   const session = await verifyGoogleOauth(req.body.code);
-
-//   setupSessionCookies(res, session);
-
-//   res.json({
-//     status: 200,
-//     message: 'Successfully loged in via Google Oauth!',
-//     data: { accessToken: session.accessToken },
-//   });
-// };

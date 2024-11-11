@@ -28,7 +28,7 @@ requestBody:
             description: The user's password.
 responses:
   '201':
-    description: Creates a new contact
+    description: Creates a new user
     content:
       application/json:
         schema:
@@ -43,7 +43,7 @@ responses:
               example: 201
             message:
               type: string
-              example: Successfully created a contact!
+              example: Successfully created a user!
             data:
               type: object
               properties:

@@ -9,8 +9,8 @@ import handlebars from 'handlebars';
 export const sendSupportMessageController = async (req, res) => {
   const email = req.body.email;
   const message = req.body.message;
-  const supportEmail = "bilouspm@gmail.com";
-  //  const supportEmail = "taskpro.project@gmail.com"
+  // const supportEmail = "bilouspm@gmail.com";
+    const supportEmail = "taskpro.project@gmail.com";
   if (!email || !message) {
     throw createHttpError(400, 'Email and message are required');
   }
