@@ -1,5 +1,3 @@
-// src/controllers/boards.js
-
 import {
   getAllBoards,
   getBoardById,
@@ -13,7 +11,13 @@ import { deleteCardsById, getCardsByColumnId } from '../services/card.js';
 
 // ----- Create Board -----
 export const createBoardController = async (req, res, next) => {
-  const board = await createBoard(req.body, req.user);
+const user = req.user;
+
+if(!user){
+ throw createHttpError(401, 'Access token expired');
+}
+
+const board = await createBoard(req.body, user);
 
   res.status(201).json({
     status: 201,

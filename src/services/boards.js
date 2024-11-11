@@ -1,5 +1,3 @@
-// src/services/boards.js
-
 import { BoardsCollection } from '../db/models/board.js';
 import { ColumnsCollection } from '../db/models/columns.js';
 import { CardsCollection } from '../db/models/card.js';
