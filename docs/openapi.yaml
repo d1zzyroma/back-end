@@ -50,6 +50,15 @@ paths:
   /boards:
     post:
       $ref: '../swagger/paths/boards/createBoard.yaml'
+  /boards/boardId:
+    get:
+      $ref: '../swagger/paths/boards/{id}/getBoardById.yaml'
+    patch:
+      $ref: '../swagger/paths/boards/{id}/updateBoard.yaml'
+    delete:
+      $ref: '../swagger/paths/boards/{id}/deleteBoard.yaml'
+
+
 components:
   schemas:
     # User:
