@@ -14,18 +14,16 @@ parameters:
       example: '65ca67e7ae7f10c88b598384'
 requestBody:
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
         required:
           - columnId
-
-          properties:
-            columnId:
-              description: "Card's column id"
-              type: string
-              example: 65e4decdd286b30065d54af9
-
+        properties:
+          columnId:
+            description: "Card's column id"
+            type: string
+            example: 65e4decdd286b30065d54af9
 responses:
   '200':
     description: 'Successfully patched a card!'
@@ -46,24 +44,6 @@ responses:
               example: 'Successfully patched a card!'
             data:
               type: object
+              $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
   '404':
-    description: 'Not Found'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-            - data
-          properties:
-            status:
-              type: integer
-              example: 404
-            message:
-              type: string
-              example: NotFoundError
-            data:
-              type: object
-              example:
-                message: 'Card not found'
+    $ref: '../../../components/responses/responseErrorSchemas/404.yaml'

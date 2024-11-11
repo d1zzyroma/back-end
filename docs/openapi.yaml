@@ -70,23 +70,23 @@ paths:
       $ref: '../swagger/paths/columns/updateColumn.yaml'
     delete:
       $ref: '../swagger/paths/columns/deleteColumn.yaml'
-      
-   /cards/{columnId}:
+  # Cards
+  /cards/:columnId:
     post:
-      $ref: ../swagger/paths/cards/{columnId}/post.yaml
-  /cards/{id}:
+      $ref: '../swagger/paths/cards/{columnId}/post.yaml'
+  /cards/cardId:
     patch:
-      $ref: ../swagger/paths/cards/{id}/patch.yaml
+      $ref: '../swagger/paths/cards/{id}/patch.yaml'
     delete:
-      $ref: ../swagger/paths/cards/{id}/delete.yaml
-  /cards/replace/{id}:
+      $ref: '../swagger/paths/cards/{id}/delete.yaml'
+  /cards/replace/cardId:
     patch:
-      $ref: ../swagger/paths/cards/replace/{id}/patch.yaml
+      $ref: '../swagger/paths/cards/{id}/replace.yaml'
 
 components:
   schemas:
-    # User:
-    #   $ref: '../swagger/components/schemas/user.yaml'
+    User:
+      $ref: '../swagger/components/schemas/user.yaml'
 #     Cards
 #       $ref: '../swagger/components/schemas/card.yaml'
 #     RegisterUser:

@@ -7,7 +7,7 @@ required:
 properties:
   _id:
     type: string
-    description: Unique identifier for the step
+    description: Unique identifier for the card
     example: "673056fde57ecb50c727d2fd"
   title:
     type: string
@@ -22,6 +22,10 @@ properties:
     description: Priority level of the step
     enum: ["High", "Medium", "Low", "Without priority"]
     example: "Without priority"
+  deadline:
+    description: "Card's deadline"
+    type: string
+    example: '12.11.2024'
   columnId:
     type: string
     description: Identifier of the column this step belongs to

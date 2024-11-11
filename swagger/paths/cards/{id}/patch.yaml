@@ -14,21 +14,14 @@ parameters:
       example: '65ca67e7ae7f10c88b598384'
 requestBody:
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
-        required:
-          - _id
-          - title
-          - description
-          - deadline
-          - priority
-
-          properties:
-            title:
-              description: "Card's title"
-              type: string
-              example: 'New card title'
+        properties:
+          title:
+            description: "Card's title"
+            type: string
+            example: 'New card title'
           description:
             description: "Card's description"
             type: string
@@ -61,24 +54,6 @@ responses:
               example: 'Successfully updated a card!'
             data:
               type: object
+              $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
   '404':
-    description: 'Not Found'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-            - data
-          properties:
-            status:
-              type: integer
-              example: 404
-            message:
-              type: string
-              example: NotFoundError
-            data:
-              type: object
-              example:
-                message: 'Card not found'
+    $ref: '../../../components/responses/responseErrorSchemas/404.yaml'

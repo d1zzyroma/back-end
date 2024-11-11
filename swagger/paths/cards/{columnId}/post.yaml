@@ -5,9 +5,16 @@ operationId: createCard
 description: 'Create a card with payload'
 security:
   - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '67ca67e7ae7f10c88b598384'
 requestBody:
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
         required:
@@ -15,25 +22,23 @@ requestBody:
           - description
           - deadline
           - priority
-
         properties:
           title:
             description: "Card's title"
             type: string
             example: 'New card title'
-        description:
-          description: "Card's description"
-          type: string
-          example: 'New task description'
-        deadline:
-          description: "Card's deadline"
-          type: string
-          example: '12.11.2024'
-        priority:
-          description: "Card's priority"
-          type: string
-          enum: ['Low', 'Medium', 'High', 'Without priority']
-
+          description:
+            description: "Card's description"
+            type: string
+            example: 'New task description'
+          deadline:
+            description: "Card's deadline"
+            type: string
+            example: '12.11.2024'
+          priority:
+            description: "Card's priority"
+            type: string
+            enum: ['Low', 'Medium', 'High', 'Without priority']
 responses:
   '201':
     description: Creates a contact
@@ -54,6 +59,7 @@ responses:
               example: Successfully created a card!
             data:
               type: object
-              $ref: '../../components/schemas/card.yaml'
+              $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../../components/responses/responseErrorSchemas/401.yaml'
+
