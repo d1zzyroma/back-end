@@ -1,0 +1,39 @@
+description: "Schema for the card object, containing details like title, description, deadline, priority, and column ID"
+
+type: object
+required:
+  - title
+  - description
+  - priority
+  - columnId
+additionalProperties: false
+properties:
+  title:
+    type: string
+    description: "The title of the card"
+    example: "Complete project report"
+  description:
+    type: string
+    description: "A brief description of the task or card"
+    example: "Prepare and finalize the project report for Q4"
+  deadline:
+    type: string
+    format: date
+    description: "The deadline for the card"
+    example: "2024-12-31"
+  priority:
+    type: string
+    description: "The priority level of the card"
+    enum:
+      - "Low"
+      - "Medium"
+      - "High"
+      - "Without priority"
+    default: "Without priority"
+    example: "Medium"
+  columnId:
+    type: string
+    description: "The ID of the column to which this card belongs"
+    example: "64a7b9e2f2c23a1b4a0b5678"
+
+

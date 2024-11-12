@@ -1,0 +1,30 @@
+description: "Schema for a user session object containing access tokens and their expiration dates"
+type: object
+required:
+  - userId
+  - accessToken
+  - accessTokenValidUntil
+additionalProperties: false
+properties:
+  userId:
+    type: string
+    description: "The user ID to which the session belongs"
+    example: "64a7b9e2f2c23a1b4a0b1234"
+  accessToken:
+    type: string
+    description: ""
+    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  accessTokenValidUntil:
+    type: string
+    format: date-time
+    description: "Access token for user session authentication"
+    example: "2024-12-31T23:59:59Z"
+  # refreshToken:
+  #   type: string
+  #   description: "Access refresh token"
+  #   example: "dGhpcyBpcyBhIGZyZXNoIHJlZnJlc2ggdG9rZW4="
+  # refreshTokenValidUntil:
+  #   type: string
+  #   format: date-time
+  #   description: "The date and time until which the refresh token is valid"
+  #   example: "2025-01-31T23:59:59Z"

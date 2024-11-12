@@ -1,0 +1,17 @@
+description: "Schema for the column object, containing details like title and board ID"
+type: object
+required:
+  - title
+  - boardId
+additionalProperties: false
+properties:
+  title:
+    type: string
+    description: "The title of the column"
+    example: "To Do"
+  boardId:
+    type: string
+    description: "The ID of the board to which this column belongs"
+    example: "64a7b9e2f2c23a1b4a0b5678"
+
+      

@@ -1,0 +1,38 @@
+description: "User object schema"
+type: object
+required:
+  - name
+  - email
+  - password
+  - theme
+additionalProperties: false
+properties:
+  name:
+    type: string
+    description: "User's name"
+    example: "John Doe"
+  email:
+    type: string
+    description: "User's email"
+    format: email
+    example: "john.doe@example.com"
+  password:
+    type: string
+    description: "User's password"
+    example: "yourSecurePassword123!"
+    writeOnly: true  # Protects the password field from being displayed in API responses
+  avatarUrl:
+    type: string
+    format: uri
+    example: "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+  theme:
+    type: string
+    description: "User interface design theme"
+    enum:
+      - light
+      - dark
+      - violet
+    example: "light"
+
+
+

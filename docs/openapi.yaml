@@ -6,6 +6,10 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Personal Task's Manager app
+  contact:
+    name: Task Manager backend support
+    url: https://task-manager-backend-y4a1.onrender.com
+    email: bilouspm@gmail.com
 tags:
   - name: Auth
     description: Auth operations.
@@ -86,16 +90,17 @@ paths:
 components:
   schemas:
     User:
-      $ref: '../swagger/components/schemas/user.yaml'
-#     Cards
-#       $ref: '../swagger/components/schemas/card.yaml'
-#     RegisterUser:
-#       $ref: '../swagger/components/schemas/registerUser.yaml'
-    # LoginUser:
-    #   $ref: '../swagger/components/schemas/loginUser.yaml'
-    # Error:
-    #   $ref: '../swagger/components/schemas/error.yaml'
+      $ref: ../swagger/components/schemas/userSchema.yaml
+    Session:
+      $ref: ../swagger/components/schemas/sessionSchema.yaml
+    Board:
+      $ref: ../swagger/components/schemas/boardSchema.yaml
+    Column:
+      $ref: ../swagger/components/schemas/columnsSchema.yaml
+    Card:
+      $ref: ../swagger/components/schemas/cardsSchema.yaml
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT

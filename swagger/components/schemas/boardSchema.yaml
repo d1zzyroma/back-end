@@ -1,0 +1,26 @@
+description: "Schema for the board object, containing details like title, icon, background, and owner"
+type: object
+required:
+  - title
+  - owner
+additionalProperties: false
+properties:
+  title:
+    type: string
+    description: "The title of the board"
+    example: "Project Roadmap"
+  icon:
+    type: string
+    description: "The icon for the board"
+    default: "default"
+    example: "default"
+  background:
+    type: string
+    description: "The background color or image of the board"
+    default: "default"
+    example: "default"
+  owner:
+    type: string
+    description: "The ID of the user who owns the board"
+    example: "64a7b9e2f2c23a1b4a0b5678"
+
