@@ -29,12 +29,18 @@ export const generateOauthLink = () => {
 };
 
 export const verifyCode = async (code) => {
+
+// const clientId ="1078170617566-gh1hv176iuiikt8hvfv8n3c662j6vn2q.apps.googleusercontent.com";
+
   try {
     // const { tokens } = await oauthClient.getToken(code);
     // const idToken = tokens.id_token;
     // const ticket = await oauthClient.verifyIdToken({ idToken });
 
-    const ticket = await oauthClient.verifyIdToken(code);
+    const ticket = await oauthClient.verifyIdToken({
+      idToken: code});
+
+    // const ticket = await oauthClient.verifyIdToken(code);
 
 
     return ticket.payload;
