@@ -62,6 +62,7 @@ export const verifyGoogleOauth = async (code) => {
   const session = await createSession(user._id);
   return session;
 };
+
 // ----- Refresh session -----
 // export const refreshSession = async (sessionId, sessionToken) => {
 //   const session = await SessionCollection.findOne({

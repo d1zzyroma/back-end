@@ -67,19 +67,9 @@ export const logoutUserController = async (req, res) => {
   res.status(204).send();
 };
 
-// ----- Request GoogleOauth Url -----
-export const requestGoogleOauthUrlController = (req, res) => {
-  const link = generateOauthLink();
-
-  res.json({
-    status: 200,
-    message: 'Successfully requested oauth link!',
-    data: { link },
-  });
-};
-
 // ----- Verify Google Oauth -----
 export const verifyGoogleOauthControler = async (req, res) => {
+  console.log(req.body.code);
   const session = await verifyGoogleOauth(req.body.code);
 
   setupSessionCookies(res, session);
@@ -114,4 +104,16 @@ export const verifyGoogleOauthControler = async (req, res) => {
 //       data: { message: error.message },
 //     });
 //   }
+// };
+
+
+// ----- Request GoogleOauth Url -----
+// export const requestGoogleOauthUrlController = (req, res) => {
+//   const link = generateOauthLink();
+
+//   res.json({
+//     status: 200,
+//     message: 'Successfully requested oauth link!',
+//     data: { link },
+//   });
 // };

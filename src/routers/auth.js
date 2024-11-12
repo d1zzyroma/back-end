@@ -5,7 +5,6 @@ import {
   logoutUserController,
   // refreshUserSessionController,
   registerUserController,
-  requestGoogleOauthUrlController,
   verifyGoogleOauthControler,
 } from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
@@ -28,10 +27,6 @@ authRouter.post(
 
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-// authRouter.post(
-//   '/request-google-oauth-link',
-//   ctrlWrapper(requestGoogleOauthUrlController),
-// );
 authRouter.post(
   '/verify-oauth',
   validateBody(verifyGoogleOauthValidationSchema),
