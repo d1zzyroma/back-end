@@ -7,7 +7,12 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of Personal Task's Manager app"
+    "description": "This is a documentation of Personal Task's Manager app",
+    "contact": {
+      "name": "Task Manager backend support",
+      "url": "https://task-manager-backend-y4a1.onrender.com",
+      "email": "bilouspm@gmail.com"
+    }
   },
   "servers": [
     {
@@ -1520,7 +1525,19 @@
   "components": {
     "schemas": {
       "User": {
-        "$ref": "#/components/schemas/user"
+        "$ref": "#/components/schemas/userSchema-2"
+      },
+      "Session": {
+        "$ref": "#/components/schemas/sessionSchema"
+      },
+      "Board": {
+        "$ref": "#/components/schemas/boardSchema-2"
+      },
+      "Column": {
+        "$ref": "#/components/schemas/columnsSchema"
+      },
+      "Card": {
+        "$ref": "#/components/schemas/cardsSchema"
       },
       "userSchema": {
         "required": [
@@ -1706,32 +1723,176 @@
           }
         }
       },
-      "user": {
+      "userSchema-2": {
+        "description": "User object schema",
         "type": "object",
         "required": [
-          "_id",
-          "name"
+          "name",
+          "email",
+          "password",
+          "theme"
         ],
+        "additionalProperties": false,
         "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "66f8ce62907b1bc9bc45a365"
-          },
           "name": {
-            "description": "User's name",
             "type": "string",
+            "description": "User's name",
             "example": "John Doe"
           },
           "email": {
+            "type": "string",
             "description": "User's email",
-            "type": "string",
-            "example": "testcontact@mail.com"
+            "format": "email",
+            "example": "john.doe@example.com"
           },
-          "photo": {
-            "description": "Link to User's photo",
+          "password": {
             "type": "string",
+            "description": "User's password",
+            "example": "yourSecurePassword123!",
+            "writeOnly": true
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          },
+          "theme": {
+            "type": "string",
+            "description": "User interface design theme",
+            "enum": [
+              "light",
+              "dark",
+              "violet"
+            ],
+            "example": "light"
+          }
+        }
+      },
+      "sessionSchema": {
+        "description": "Schema for a user session object containing access tokens and their expiration dates",
+        "type": "object",
+        "required": [
+          "userId",
+          "accessToken",
+          "accessTokenValidUntil"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The user ID to which the session belongs",
+            "example": "64a7b9e2f2c23a1b4a0b1234"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "accessTokenValidUntil": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Access token for user session authentication",
+            "example": "2024-12-31T23:59:59Z"
+          }
+        }
+      },
+      "boardSchema-2": {
+        "description": "Schema for the board object, containing details like title, icon, background, and owner",
+        "type": "object",
+        "required": [
+          "title",
+          "owner"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the board",
+            "example": "Project Roadmap"
+          },
+          "icon": {
+            "type": "string",
+            "description": "The icon for the board",
+            "default": "default",
+            "example": "default"
+          },
+          "background": {
+            "type": "string",
+            "description": "The background color or image of the board",
+            "default": "default",
+            "example": "default"
+          },
+          "owner": {
+            "type": "string",
+            "description": "The ID of the user who owns the board",
+            "example": "64a7b9e2f2c23a1b4a0b5678"
+          }
+        }
+      },
+      "columnsSchema": {
+        "description": "Schema for the column object, containing details like title and board ID",
+        "type": "object",
+        "required": [
+          "title",
+          "boardId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the column",
+            "example": "To Do"
+          },
+          "boardId": {
+            "type": "string",
+            "description": "The ID of the board to which this column belongs",
+            "example": "64a7b9e2f2c23a1b4a0b5678"
+          }
+        }
+      },
+      "cardsSchema": {
+        "description": "Schema for the card object, containing details like title, description, deadline, priority, and column ID",
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "priority",
+          "columnId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the card",
+            "example": "Complete project report"
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description of the task or card",
+            "example": "Prepare and finalize the project report for Q4"
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date",
+            "description": "The deadline for the card",
+            "example": "2024-12-31"
+          },
+          "priority": {
+            "type": "string",
+            "description": "The priority level of the card",
+            "enum": [
+              "Low",
+              "Medium",
+              "High",
+              "Without priority"
+            ],
+            "default": "Without priority",
+            "example": "Medium"
+          },
+          "columnId": {
+            "type": "string",
+            "description": "The ID of the column to which this card belongs",
+            "example": "64a7b9e2f2c23a1b4a0b5678"
           }
         }
       }
@@ -1739,7 +1900,8 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
     "responses": {

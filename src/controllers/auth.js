@@ -69,7 +69,6 @@ export const logoutUserController = async (req, res) => {
 
 // ----- Verify Google Oauth -----
 export const verifyGoogleOauthControler = async (req, res) => {
-  console.log(req.body.code);
   const session = await verifyGoogleOauth(req.body.code);
 
   setupSessionCookies(res, session);
