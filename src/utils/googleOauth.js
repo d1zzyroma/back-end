@@ -30,10 +30,12 @@ export const generateOauthLink = () => {
 
 export const verifyCode = async (code) => {
   try {
-    const { tokens } = await oauthClient.getToken(code);
-    const idToken = tokens.id_token;
+    // const { tokens } = await oauthClient.getToken(code);
+    // const idToken = tokens.id_token;
+    // const ticket = await oauthClient.verifyIdToken({ idToken });
 
-    const ticket = await oauthClient.verifyIdToken({ idToken });
+    const ticket = await oauthClient.verifyIdToken(code);
+
 
     return ticket.payload;
   } catch (err) {

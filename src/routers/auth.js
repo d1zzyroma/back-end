@@ -28,10 +28,10 @@ authRouter.post(
 
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-authRouter.post(
-  '/request-google-oauth-link',
-  ctrlWrapper(requestGoogleOauthUrlController),
-);
+// authRouter.post(
+//   '/request-google-oauth-link',
+//   ctrlWrapper(requestGoogleOauthUrlController),
+// );
 authRouter.post(
   '/verify-oauth',
   validateBody(verifyGoogleOauthValidationSchema),
