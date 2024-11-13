@@ -14,7 +14,7 @@ requestBody:
         required:
           - theme
         properties:
-          name:
+          theme:
             type: string
             example: dark
             description: background theme name

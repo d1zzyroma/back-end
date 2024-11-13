@@ -71,16 +71,21 @@
                 "properties": {
                   "name": {
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "John Doe",
                     "description": "The user's name."
                   },
                   "email": {
                     "type": "string",
+                    "format": "email",
                     "example": "john.doe@example.com",
                     "description": "The user's email address."
                   },
                   "password": {
                     "type": "string",
+                    "minLength": 8,
+                    "maxLength": 16,
                     "example": "password123",
                     "description": "The user's password."
                   }
@@ -294,6 +299,72 @@
         }
       }
     },
+    "/auth/verify-oauth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Google OAuth Verification",
+        "operationId": "googleOAuth",
+        "description": "Verifies Google OAuth code and logs in the user.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "code"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "OAuth authorization code provided Google.",
+                    "example": "4/0AY0e-g7U2v..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in via Google OAuth.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in via Google Oauth!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "description": "Access token for authenticated session.",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI..."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
     "/auth/logout": {
       "post": {
         "tags": [
@@ -415,11 +486,14 @@
                   },
                   "email": {
                     "type": "string",
+                    "format": "email",
                     "example": "john.doe@example.com",
                     "description": "The user's email address."
                   },
                   "password": {
                     "type": "string",
+                    "minLength": 8,
+                    "maxLength": 16,
                     "example": "password123",
                     "description": "The user's password"
                   },
@@ -495,7 +569,7 @@
                   "theme"
                 ],
                 "properties": {
-                  "name": {
+                  "theme": {
                     "type": "string",
                     "example": "dark",
                     "description": "background theme name"
@@ -620,11 +694,14 @@
                   "email": {
                     "description": "User's email",
                     "type": "string",
+                    "format": "email",
                     "example": "testuser@mail.com"
                   },
                   "message": {
                     "description": "Message that will be sent to support",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 200
                   }
                 }
               }
@@ -731,6 +808,8 @@
                 "properties": {
                   "title": {
                     "description": "Board's name",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "type": "string",
                     "example": "Project 1"
                   }
@@ -915,6 +994,8 @@
                   "title": {
                     "description": "Board's name",
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "Project 1"
                   },
                   "background": {
@@ -1036,6 +1117,8 @@
                   "title": {
                     "description": "column's name",
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "To Do something"
                   }
                 }
@@ -1112,6 +1195,8 @@
                   "title": {
                     "description": "column's name",
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "To Do something New"
                   }
                 }
@@ -1226,16 +1311,20 @@
                   "title": {
                     "description": "Card's title",
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "New card title"
                   },
                   "description": {
                     "description": "Card's description",
                     "type": "string",
+                    "minLength": 3,
                     "example": "New task description"
                   },
                   "deadline": {
                     "description": "Card's deadline",
                     "type": "string",
+                    "format": "date",
                     "example": "12.11.2024"
                   },
                   "priority": {
@@ -1246,7 +1335,8 @@
                       "Medium",
                       "High",
                       "Without priority"
-                    ]
+                    ],
+                    "example": "Low"
                   }
                 }
               }
@@ -1322,16 +1412,20 @@
                   "title": {
                     "description": "Card's title",
                     "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
                     "example": "New card title"
                   },
                   "description": {
                     "description": "Card's description",
                     "type": "string",
+                    "minLength": 3,
                     "example": "New task description"
                   },
                   "deadline": {
                     "description": "Card's deadline",
                     "type": "string",
+                    "format": "date",
                     "example": "12.11.2024"
                   },
                   "priority": {
@@ -1342,7 +1436,8 @@
                       "Medium",
                       "High",
                       "Without priority"
-                    ]
+                    ],
+                    "example": "Low"
                   }
                 }
               }

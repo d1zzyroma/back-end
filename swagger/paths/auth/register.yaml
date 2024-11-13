@@ -16,14 +16,19 @@ requestBody:
         properties:
           name:
             type: string
+            minLength: 3
+            maxLength: 30
             example: John Doe
             description: The user's name.
           email:
             type: string
+            format: email
             example: john.doe@example.com
             description: The user's email address.
           password:
             type: string
+            minLength: 8
+            maxLength: 16
             example: password123
             description: The user's password.
 responses:

@@ -21,6 +21,8 @@ requestBody:
           title:
             description: "column's name"
             type: string
+            minLength: 3
+            maxLength: 30
             example: 'To Do something New'
 responses:
   '200':

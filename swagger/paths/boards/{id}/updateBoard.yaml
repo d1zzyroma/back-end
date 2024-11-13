@@ -21,6 +21,8 @@ requestBody:
           title:
             description: "Board's name"
             type: string
+            minLength: 3
+            maxLength: 30
             example: 'Project 1'
           background:
             description: 'background images'

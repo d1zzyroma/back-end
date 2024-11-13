@@ -26,19 +26,24 @@ requestBody:
           title:
             description: "Card's title"
             type: string
+            minLength: 3
+            maxLength: 30
             example: 'New card title'
           description:
             description: "Card's description"
             type: string
+            minLength: 3
             example: 'New task description'
           deadline:
             description: "Card's deadline"
             type: string
+            format: date
             example: '12.11.2024'
           priority:
             description: "Card's priority"
             type: string
             enum: ['Low', 'Medium', 'High', 'Without priority']
+            example: Low
 responses:
   '201':
     description: Creates a contact
