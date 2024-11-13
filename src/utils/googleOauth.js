@@ -18,16 +18,6 @@ const oauthClient = new OAuth2Client({
   redirectUri: env(GOOGLE_OAUTH.REDIRECT_URI),
 });
 
-export const generateOauthLink = () => {
-  return oauthClient.generateAuthUrl({
-    access_type: 'offline',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email',
-    ],
-  });
-};
-
 export const verifyCode = async (code) => {
   try {
     const ticket = await oauthClient.verifyIdToken({

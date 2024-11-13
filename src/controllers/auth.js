@@ -9,7 +9,6 @@ import {
 } from '../services/auth.js';
 import bcrypt from 'bcrypt';
 import { setupSessionCookies } from '../utils/setupSessionCookies.js';
-import { generateOauthLink } from '../utils/googleOauth.js';
 
 //  ----- User Register -----
 export const registerUserController = async (req, res) => {
