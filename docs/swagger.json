@@ -2,17 +2,26 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Tasks_Manager app",
+    "title": "Tasks_Manager app✅",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
     "description": "This is a documentation of Personal Task's Manager app",
     "contact": {
-      "name": "Task Manager backend support",
-      "url": "https://task-manager-backend-y4a1.onrender.com",
-      "email": "bilouspm@gmail.com"
-    }
+      "name": "🌐 Task_Manager app.",
+      "url": "https://task-manager-backend-y4a1.onrender.com"
+    },
+    "x-contacts": [
+      {
+        "name": "🌐 Git_Hub repository.",
+        "url": "https://github.com/BilousPM/task-manager-backend"
+      },
+      {
+        "name": "📧 Technical Support",
+        "email": "bilouspm@gmail.com"
+      }
+    ]
   },
   "servers": [
     {
@@ -1523,22 +1532,108 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Please check the provided data"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Access token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "example": {
+                    "message": "Not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "schemas": {
-      "User": {
-        "$ref": "#/components/schemas/userSchema"
-      },
-      "Session": {
-        "$ref": "#/components/schemas/sessionSchema"
-      },
-      "Board": {
-        "$ref": "#/components/schemas/boardSchema"
-      },
-      "Column": {
-        "$ref": "#/components/schemas/columnsSchema"
-      },
-      "Card": {
-        "$ref": "#/components/schemas/cardsSchema"
-      },
       "userSchema": {
         "description": "User object schema",
         "type": "object",
@@ -1681,135 +1776,6 @@
             "type": "string",
             "description": "The ID of the column to which this card belongs",
             "example": "64a7b9e2f2c23a1b4a0b5678"
-          }
-        }
-      },
-      "sessionSchema": {
-        "description": "Schema for a user session object containing access tokens and their expiration dates",
-        "type": "object",
-        "required": [
-          "userId",
-          "accessToken",
-          "accessTokenValidUntil"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "userId": {
-            "type": "string",
-            "description": "The user ID to which the session belongs",
-            "example": "64a7b9e2f2c23a1b4a0b1234"
-          },
-          "accessToken": {
-            "type": "string",
-            "description": "",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-          },
-          "accessTokenValidUntil": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Access token for user session authentication",
-            "example": "2024-12-31T23:59:59Z"
-          }
-        }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    },
-    "responses": {
-      "400": {
-        "description": "Bad request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Please check the provided data"
-                }
-              }
-            }
-          }
-        }
-      },
-      "401": {
-        "description": "Unauthorized error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "UnauthorizedError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Access token expired"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "404": {
-        "description": "Not Found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "NotFoundError"
-                },
-                "data": {
-                  "type": "object",
-                  "example": {
-                    "message": "Not found"
-                  }
-                }
-              }
-            }
           }
         }
       }
