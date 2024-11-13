@@ -7,12 +7,11 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of Personal Task's Manager app",
+    "description": "This is a documentation of Personal Task's Manager app. 🌐  - https://task-manager-backend-y4a1.onrender.com",
     "contact": {
-      "name": "Task_Manager app. Technical Support",
-      "url": "🌐 https://github.com/BilousPM/task-manager-backend",
-      "email": "📧  bilouspm@gmail.com",
-      "x-note": "🌐  Task_Manager app - https://task-manager-backend-y4a1.onrender.com"
+      "name": "Technical Support",
+      "url": "https://github.com/BilousPM/task-manager-backend",
+      "email": "bilouspm@gmail.com"
     }
   },
   "servers": [
