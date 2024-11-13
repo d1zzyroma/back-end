@@ -44,6 +44,6 @@ responses:
               example: Column created successfully
             data:
               type: object
-              $ref: '../../components/responses/responseSchemas/columnSchema.yaml'
+              $ref: ../../components/schemas/columnsSchema.yaml
   '404':
     $ref: ../../components/responses/responseErrorSchemas/404.yaml

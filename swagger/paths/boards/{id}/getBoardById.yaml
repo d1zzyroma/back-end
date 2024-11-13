@@ -34,7 +34,7 @@ responses:
               type: object
               properties:
                 board:
-                  $ref: ../../../components/responses/responseSchemas/boardSchema.yaml
+                  $ref: ../../../components/schemas/boardSchema.yaml
                 columnsAll:
                   type: array
                   items:
@@ -68,6 +68,6 @@ responses:
                         example: "2024-11-10T06:41:04.611Z"
                       cards:
                         items:
-                          $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
+                          $ref: ../../../components/schemas/cardsSchema.yaml
   '404':
     $ref: '../../../components/responses/responseErrorSchemas/404.yaml'

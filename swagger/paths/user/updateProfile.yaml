@@ -47,7 +47,7 @@ responses:
               example: Profile updated successfully
             data:
               type: object
-              $ref: ../../components/responses/responseSchemas/userSchema.yaml
+              $ref: ../../components/schemas/userSchema.yaml
   '401':
     $ref: ../../components/responses/responseErrorSchemas/401.yaml
   '404':

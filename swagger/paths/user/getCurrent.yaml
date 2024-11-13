@@ -28,19 +28,19 @@ responses:
               properties:
                 user:
                   type: object
-                  $ref: '../../components/responses/responseSchemas/userSchema.yaml'
+                  $ref: ../../components/schemas/userSchema.yaml
                 boards:
                   type: array
                   items:
-                    $ref: ../../components/responses/responseSchemas/boardSchema.yaml
+                    $ref: ../../components/schemas/boardSchema.yaml
                 columns:
                   type: array
                   items:
-                    $ref: '../../components/responses/responseSchemas/columnSchema.yaml'
+                    $ref: ../../components/schemas/columnsSchema.yaml
                 cards:
                   type: array
                   items:
-                    $ref: ../../components/responses/responseSchemas/cardSchema.yaml
+                    $ref: ../../components/schemas/cardsSchema.yaml
   '401':
     $ref: ../../components/responses/responseErrorSchemas/401.yaml
 

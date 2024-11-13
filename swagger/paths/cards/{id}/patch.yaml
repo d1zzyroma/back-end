@@ -54,6 +54,6 @@ responses:
               example: 'Successfully updated a card!'
             data:
               type: object
-              $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
+              $ref: ../../../components/schemas/cardsSchema.yaml
   '404':
     $ref: '../../../components/responses/responseErrorSchemas/404.yaml'

@@ -59,7 +59,7 @@ responses:
               example: Successfully created a card!
             data:
               type: object
-              $ref: '../../../components/responses/responseSchemas/cardSchema.yaml'
+              $ref: ../../../components/schemas/cardsSchema.yaml
   '401':
     $ref: '../../../components/responses/responseErrorSchemas/401.yaml'
 

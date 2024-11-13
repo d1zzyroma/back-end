@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Tasks_Manager app",
+    "title": "Tasks_Manager app 📒",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -10,7 +10,7 @@
     "description": "This is a documentation of Personal Task's Manager app",
     "contact": {
       "name": "Task Manager backend support",
-      "url": "https://task-manager-backend-y4a1.onrender.com",
+      "url":   "https://task-manager-backend-y4a1.onrender.com",
       "email": "bilouspm@gmail.com"
     }
   },

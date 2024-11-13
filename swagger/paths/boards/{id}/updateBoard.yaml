@@ -50,6 +50,6 @@ responses:
               example: Successfully updated a board with Id 6731c3311073caeedf7353b6!
             data:
               type: object
-              $ref: '../../../components/responses/responseSchemas/boardSchema.yaml'
+              $ref: '../../../components/schemas/boardSchema.yaml'
   '404':
     $ref: ../../../components/responses/responseErrorSchemas/404.yaml
