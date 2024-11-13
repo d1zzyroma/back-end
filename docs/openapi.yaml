@@ -7,13 +7,10 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Personal Task's Manager app
   contact:
-    name: 🌐 Task_Manager app.
-    url: https://task-manager-backend-y4a1.onrender.com
-  x-contacts:
-    - name: 🌐 Git_Hub repository.
-      url: https://github.com/BilousPM/task-manager-backend
-    - name: 📧 Technical Support
-      email: bilouspm@gmail.com
+    name:  Task_Manager app. Technical Support
+    url: 🌐 https://github.com/BilousPM/task-manager-backend
+    email: 📧  bilouspm@gmail.com
+    x-note: 🌐  Task_Manager app - https://task-manager-backend-y4a1.onrender.com
 tags:
   - name: Auth
     description: Auth operations.
@@ -92,17 +89,6 @@ paths:
       $ref: '../swagger/paths/cards/{id}/replace.yaml'
 
 components:
-  # schemas:
-  #   User:
-  #     $ref: ../swagger/components/schemas/userSchema.yaml
-  #   Session:
-  #     $ref: ../swagger/components/schemas/sessionSchema.yaml
-  #   Board:
-  #     $ref: ../swagger/components/schemas/boardSchema.yaml
-  #   Column:
-  #     $ref: ../swagger/components/schemas/columnsSchema.yaml
-  #   Card:
-  #     $ref: ../swagger/components/schemas/cardsSchema.yaml
   securitySchemes:
     bearerAuth:
       type: http

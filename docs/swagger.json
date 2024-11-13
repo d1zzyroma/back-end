@@ -9,19 +9,11 @@
     },
     "description": "This is a documentation of Personal Task's Manager app",
     "contact": {
-      "name": "🌐 Task_Manager app.",
-      "url": "https://task-manager-backend-y4a1.onrender.com"
-    },
-    "x-contacts": [
-      {
-        "name": "🌐 Git_Hub repository.",
-        "url": "https://github.com/BilousPM/task-manager-backend"
-      },
-      {
-        "name": "📧 Technical Support",
-        "email": "bilouspm@gmail.com"
-      }
-    ]
+      "name": "Task_Manager app. Technical Support",
+      "url": "🌐 https://github.com/BilousPM/task-manager-backend",
+      "email": "📧  bilouspm@gmail.com",
+      "x-note": "🌐  Task_Manager app - https://task-manager-backend-y4a1.onrender.com"
+    }
   },
   "servers": [
     {
@@ -977,7 +969,7 @@
         "tags": [
           "Boards"
         ],
-        "summary": "delete board with id",
+        "summary": "Delete board",
         "operationId": "deleteBoard",
         "description": "Delete board",
         "security": [

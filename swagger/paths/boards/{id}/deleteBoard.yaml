@@ -1,6 +1,6 @@
 tags:
   - Boards
-summary: delete board with id
+summary: Delete board
 operationId: deleteBoard
 description: 'Delete board'
 security:
