@@ -52,4 +52,4 @@ responses:
               type: object
               $ref: '../../../components/schemas/boardSchema.yaml'
   '404':
-    $ref: ../../../components/responses/responseErrorSchemas/404.yaml
+    $ref: ../../../components/responses/404.yaml

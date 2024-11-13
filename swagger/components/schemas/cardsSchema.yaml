@@ -11,10 +11,13 @@ properties:
   title:
     type: string
     description: "The title of the card"
+    minLength: 3
+    maxLength: 30
     example: "Complete project report"
   description:
     type: string
     description: "A brief description of the task or card"
+    minLength: 3
     example: "Prepare and finalize the project report for Q4"
   deadline:
     type: string

@@ -8,6 +8,8 @@ properties:
   title:
     type: string
     description: "The title of the board"
+    minLength: 3
+    maxLength: 30
     example: "Project Roadmap"
   icon:
     type: string

@@ -8,10 +8,11 @@ properties:
   title:
     type: string
     description: "The title of the column"
+    minLength: 3
+    maxLength: 30
     example: "To Do"
   boardId:
     type: string
     description: "The ID of the board to which this column belongs"
     example: "64a7b9e2f2c23a1b4a0b5678"
 
-      

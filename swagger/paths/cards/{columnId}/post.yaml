@@ -61,5 +61,5 @@ responses:
               type: object
               $ref: ../../../components/schemas/cardsSchema.yaml
   '401':
-    $ref: '../../../components/responses/responseErrorSchemas/401.yaml'
+    $ref: '../../../components/responses/401.yaml'
 

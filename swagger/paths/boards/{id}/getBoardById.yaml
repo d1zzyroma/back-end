@@ -70,4 +70,4 @@ responses:
                         items:
                           $ref: ../../../components/schemas/cardsSchema.yaml
   '404':
-    $ref: '../../../components/responses/responseErrorSchemas/404.yaml'
+    $ref: '../../../components/responses/404.yaml'

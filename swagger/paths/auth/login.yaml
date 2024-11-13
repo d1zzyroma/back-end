@@ -73,4 +73,4 @@ responses:
                       example: https://res.cloudinary.com/denqnnmh2/image/upload/v1731087488/zn0arkh2mdtljnh5mhcf.webp"
                       description: avatar uploaded by user (if user uploaded)
   '401':
-    $ref: ../../components/responses/responseErrorSchemas/401.yaml
+    $ref: ../../components/responses/401.yaml
